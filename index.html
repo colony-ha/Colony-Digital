@@ -1,1 +1,83 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080706">
+<meta name="description" content="COLONY DIGITAL - Premium digital wedding and event invitations.">
+<title>COLONY DIGITAL | Premium Digital Invitations</title>
+<style>
+:root{--gold:#d9ad55;--light-gold:#f5d994;--black:#080706;--white:#f7f0df}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--black);color:var(--white);font-family:Arial,sans-serif}
+a{text-decoration:none;color:inherit}header{position:sticky;top:0;z-index:20;background:rgba(8,7,6,.96);border-bottom:1px solid #755321;backdrop-filter:blur(12px)}
+.nav{max-width:1250px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.logo{color:var(--gold);font-family:Georgia,serif;font-size:28px;font-weight:bold;letter-spacing:3px}.logo small{display:block;text-align:center;font-size:11px;letter-spacing:7px}
+.nav-links{display:flex;gap:22px;font-size:14px}.nav-links a:hover{color:var(--gold)}
+.languages{display:flex;gap:5px;border:1px solid #765a2c;padding:5px;border-radius:30px}.languages button{border:0;color:white;background:transparent;padding:8px 11px;border-radius:20px;cursor:pointer}.languages button.active{background:var(--gold);color:#171008;font-weight:bold}
+.hero{min-height:350px;padding:65px 20px 45px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#51371155,transparent 65%),linear-gradient(135deg,#100d08,#080706)}
+.hero:before,.hero:after{content:"✦";position:absolute;color:#b88935;font-size:100px;opacity:.16}.hero:before{left:8%;top:25px}.hero:after{right:8%;bottom:15px}
+.crown{font-size:62px;color:var(--gold);line-height:1}.hero h1{color:var(--light-gold);font-family:Georgia,serif;font-size:clamp(36px,6vw,67px);letter-spacing:3px;margin:12px 0}
+.hero .tagline{color:var(--gold);font-family:Georgia,serif;font-style:italic;font-size:clamp(19px,3vw,30px)}.hero p{color:#d9cdb6;margin-top:20px;font-size:16px}
+.gold-line{width:150px;height:2px;margin:25px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.section{max-width:1250px;margin:auto;padding:35px 20px 65px}.section-title{text-align:center;color:var(--light-gold);font-family:Georgia,serif;font-size:32px;margin-bottom:8px}.section-subtitle{text-align:center;color:#a99b80;margin-bottom:35px}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.card{background:linear-gradient(145deg,#211a10,#100e0b);border:1px solid var(--gold);border-radius:20px;overflow:hidden;box-shadow:0 8px 25px #0008;transition:.3s}.card:hover{transform:translateY(-7px);box-shadow:0 12px 30px #b8893533}
+.art{height:185px;display:flex;justify-content:center;align-items:center;text-align:center;position:relative;background:radial-gradient(circle,#7c552b55,transparent 65%),linear-gradient(140deg,#17110a,#050505);border-bottom:1px solid #6d4b20}.art:before{content:"";position:absolute;inset:12px;border:1px solid #b88a42;border-radius:10px}.art-icon{font-size:65px;filter:drop-shadow(0 0 12px #d9ad55)}
+.card-content{padding:18px;text-align:center}.card h3{color:var(--light-gold);font-size:19px;min-height:44px;margin:0 0 13px}.price{font-size:27px;font-weight:bold;color:white;margin:10px 0}.duration{color:var(--gold);font-size:14px;margin-bottom:18px}.actions{display:flex;flex-direction:column;gap:9px}
+.btn{display:block;padding:12px 8px;border-radius:30px;text-align:center;font-weight:bold;cursor:pointer;transition:.2s}.btn-demo{border:1px solid var(--gold);color:var(--light-gold)}.btn-order{background:linear-gradient(110deg,#b27a23,#f3ce79);color:#171008}.btn:hover{filter:brightness(1.15)}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;border-top:1px solid #705225;border-bottom:1px solid #705225;padding:25px 10px;text-align:center;color:#e7d9bd}.feature-icon{display:block;font-size:27px;margin-bottom:8px;color:var(--gold)}
+.contact{background:linear-gradient(120deg,#171109,#080706);border-top:1px solid #72501f;padding:45px 20px}.contact-inner{max-width:1100px;margin:auto}.contact h2{text-align:center;color:var(--light-gold);font-family:Georgia,serif;font-size:32px}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}.contact-box{border:1px solid #705225;border-radius:15px;padding:22px 15px;text-align:center;background:#17130e}.contact-box h3{color:var(--gold)}.contact-box a{display:block;padding:8px;color:#e8dfce;font-size:14px;overflow-wrap:anywhere}.contact-box a:hover{color:var(--gold)}
+footer{text-align:center;padding:25px 15px;color:#9e8965;border-top:1px solid #453319;font-size:13px}footer strong{color:var(--gold)}
+@media(max-width:900px){.products{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.nav{justify-content:center}.nav-links{width:100%;justify-content:center;flex-wrap:wrap}.products{grid-template-columns:1fr}.card{max-width:420px;width:100%;margin:auto}.contact-grid{grid-template-columns:1fr}.features{grid-template-columns:repeat(2,1fr)}.hero{padding-top:45px}}
+[dir="rtl"] .nav{direction:rtl}
+</style>
+</head>
+<body>
+<header><nav class="nav">
+<a href="#" class="logo">♛ COLONY<small>DIGITAL</small></a>
+<div class="nav-links"><a href="#home" data-i="home">Home</a><a href="#projects" data-i="services">Our Services</a><a href="#about" data-i="about">About Us</a><a href="#contact" data-i="contact">Contact</a></div>
+<div class="languages"><button class="active" onclick="setLanguage('en')">EN</button><button onclick="setLanguage('fr')">FR</button><button onclick="setLanguage('ar')">AR</button></div>
+</nav></header>
+<main>
+<section class="hero" id="home"><div class="crown">♛</div><h1>COLONY DIGITAL</h1><div class="tagline" data-i="tagline">Your Digital Experience Starts Here</div><p data-i="intro">Discover our digital invitation collections</p><div class="gold-line"></div><p style="color:#e7c477" data-i="special">✦ Make Your Special Moments Unforgettable ✦</p></section>
+<section class="section" id="projects"><h2 class="section-title" data-i="title">Our Projects</h2><p class="section-subtitle" data-i="subtitle">Choose the perfect invitation for your special occasion</p><div class="products" id="products"></div></section>
+<section class="section" id="about"><div class="features"><div><span class="feature-icon">♢</span><span data-i="feature1">Quality Designs</span></div><div><span class="feature-icon">⚡</span><span data-i="feature2">Instant Delivery</span></div><div><span class="feature-icon">♧</span><span data-i="feature3">Professional Support</span></div><div><span class="feature-icon">♥</span><span data-i="feature4">Your Satisfaction</span></div></div></section>
+<section class="contact" id="contact"><div class="contact-inner"><h2 data-i="contactTitle">Contact COLONY DIGITAL</h2><p style="text-align:center;color:#c7b899" data-i="contactIntro">We are here to help you!</p>
+<div class="contact-grid">
+<div class="contact-box"><h3>◉ WhatsApp</h3><a href="https://wa.me/213793400678">+213 793 400 678</a><a href="https://wa.me/213551708889">+213 551 708 889</a></div>
+<div class="contact-box"><h3>➤ Telegram</h3><a href="https://t.me/+213793400678">+213 793 400 678</a><a href="https://t.me/+213551708889">+213 551 708 889</a></div>
+<div class="contact-box"><h3>✉ Email</h3><a href="mailto:colonyus666@gmail.com">colonyus666@gmail.com</a></div>
+</div></div></section>
+</main>
+<footer><strong>♛ COLONY DIGITAL</strong><p data-i="footer">© 2026 COLONY DIGITAL. All Rights Reserved.</p></footer>
+<script>
+const projects=[
+{name:"Wedding Card",icon:"💍",domain:"https://card.colony.dpdns.org/"},
+{name:"Wedding Invitation",icon:"💒",domain:"https://wedding.colony.dpdns.org/"},
+{name:"Wedding Envelope",icon:"✉️",domain:"https://envelope.colony.dpdns.org/"},
+{name:"Event Invitation",icon:"🎉",domain:"https://event.colony.dpdns.org/"}
+];
+const translations={
+en:{home:"Home",services:"Our Services",about:"About Us",contact:"Contact",tagline:"Your Digital Experience Starts Here",intro:"Discover our digital invitation collections",special:"✦ Make Your Special Moments Unforgettable ✦",title:"Our Projects",subtitle:"Choose the perfect invitation for your special occasion",demo:"View Demo",order:"Order Now",duration:"30 Days",feature1:"Quality Designs",feature2:"Instant Delivery",feature3:"Professional Support",feature4:"Your Satisfaction",contactTitle:"Contact COLONY DIGITAL",contactIntro:"We are here to help you!",footer:"© 2026 COLONY DIGITAL. All Rights Reserved.",message:"Hello COLONY DIGITAL! I am interested in ordering: "},
+fr:{home:"Accueil",services:"Nos Services",about:"À propos",contact:"Contact",tagline:"Votre expérience numérique commence ici",intro:"Découvrez nos collections d'invitations numériques",special:"✦ Rendez vos moments inoubliables ✦",title:"Nos Projets",subtitle:"Choisissez l'invitation parfaite pour votre événement",demo:"Voir le modèle",order:"Commander",duration:"30 jours",feature1:"Designs de qualité",feature2:"Livraison rapide",feature3:"Support professionnel",feature4:"Votre satisfaction",contactTitle:"Contacter COLONY DIGITAL",contactIntro:"Nous sommes là pour vous aider !",footer:"© 2026 COLONY DIGITAL. Tous droits réservés.",message:"Bonjour COLONY DIGITAL ! Je souhaite commander : "},
+ar:{home:"الرئيسية",services:"خدماتنا",about:"من نحن",contact:"اتصل بنا",tagline:"تجربتك الرقمية تبدأ من هنا",intro:"اكتشف مجموعتنا من الدعوات الرقمية",special:"✦ اجعل لحظاتك الخاصة لا تُنسى ✦",title:"مشاريعنا",subtitle:"اختر الدعوة المناسبة لمناسبتك الخاصة",demo:"مشاهدة النموذج",order:"اطلب الآن",duration:"30 يوماً",feature1:"تصاميم عالية الجودة",feature2:"تسليم سريع",feature3:"دعم احترافي",feature4:"رضاكم أولويتنا",contactTitle:"تواصل مع COLONY DIGITAL",contactIntro:"نحن هنا لمساعدتك!",footer:"© 2026 COLONY DIGITAL. جميع الحقوق محفوظة.",message:"السلام عليكم COLONY DIGITAL، أريد طلب خدمة: "}
+};
+let currentLanguage="en";
+function makeOrderLink(name){
+const message=translations[currentLanguage].message+name+" - 1000 DA - 30 Days";
+return "https://wa.me/213793400678?text="+encodeURIComponent(message);
+}
+function renderProducts(){
+const t=translations[currentLanguage];
+document.getElementById("products").innerHTML=projects.map(p=>'<article class="card"><div class="art"><span class="art-icon">'+p.icon+'</span></div><div class="card-content"><h3>'+p.name+'</h3><div class="price">1000 DA</div><div class="duration">◷ '+t.duration+'</div><div class="actions"><a class="btn btn-demo" href="'+p.domain+'" target="_blank" rel="noopener">'+t.demo+'</a><a class="btn btn-order" href="'+makeOrderLink(p.name)+'" target="_blank" rel="noopener">'+t.order+'</a></div></div></article>').join("");
+}
+function setLanguage(lang){
+currentLanguage=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+document.querySelectorAll("[data-i]").forEach(el=>{const key=el.dataset.i;if(translations[lang][key])el.textContent=translations[lang][key]});
+document.querySelectorAll(".languages button").forEach(btn=>btn.classList.toggle("active",btn.textContent.trim().toLowerCase()===lang));
+renderProducts();
+}
+renderProducts();
+</script>
+</body>
+</html>
