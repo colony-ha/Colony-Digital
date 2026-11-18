@@ -10,7 +10,20 @@
 main{max-width:850px;margin:auto}.brand{text-align:center;color:var(--gold2);font: bold 30px Georgia,serif;letter-spacing:3px;margin:10px}.brand small{display:block;font: bold 12px Georgia,serif;letter-spacing:7px;margin-top:5px}
 h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{text-align:center;color:#d7c6a5;line-height:1.8;margin:0 0 22px}
 .panel{background:linear-gradient(145deg,#19130b,#0d0a06);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 15px 45px #0008}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.wide{grid-column:1/-1}label{display:block;font-size:13px;color:#e9cb83;margin-bottom:7px}input,select,textarea{width:100%;padding:13px;border:1px solid #74572c;border-radius:11px;background:#080705;color:#fff3d8;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--gold2)}textarea{min-height:95px;resize:vertical}.hint{font-size:12px;color:#bca77e;line-height:1.8}.submit{width:100%;margin-top:18px;padding:15px;border:0;border-radius:30px;background:linear-gradient(110deg,#b57920,#f6cf70);color:#171006;font-weight:bold;font-size:16px;cursor:pointer}.back{display:block;text-align:center;color:#e9c46d;margin-top:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.wide{grid-column:1/-1}label{display:block;font-size:13px;color:#e9cb83;margin-bottom:7px}input,select,textarea{width:100%;padding:13px;border:1px solid #74572c;border-radius:11px;background:#080705;color:#fff3d8;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--gold2)}textarea{min-height:95px;resize:vertical}.hint{font-size:12px;color:#bca77e;line-height:1.8}
+.design-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:10px}
+.design-card{border:2px solid #74572c;border-radius:13px;padding:8px;background:#0a0805;color:#fff2d5;cursor:pointer;text-align:center;min-width:0;transition:.15s}
+.design-card.selected{border-color:#f2c967;box-shadow:0 0 0 2px #d9a94355}
+.design-art{height:145px;border:1px solid var(--accent);background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;padding:9px;position:relative;overflow:hidden}
+.design-art:before{content:"";position:absolute;inset:6px;border:1px solid var(--accent);opacity:.8}
+.design-art-inner{position:relative;z-index:1;width:100%;font-family:Georgia,serif;line-height:1.5}
+.design-art .orn{font-size:19px;color:var(--accent)}
+.design-art .sample-title{font-size:10px;letter-spacing:1px;margin:5px 0}
+.design-art .sample-names{font-size:14px;font-weight:bold;color:var(--accent);overflow-wrap:anywhere}
+.design-card strong{display:block;font-size:12px;margin:8px 0 2px;color:var(--gold2)}
+.design-card small{display:block;font-size:10px;color:#bca77e}
+@media(max-width:600px){.design-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.design-art{height:135px}}
+.submit{width:100%;margin-top:18px;padding:15px;border:0;border-radius:30px;background:linear-gradient(110deg,#b57920,#f6cf70);color:#171006;font-weight:bold;font-size:16px;cursor:pointer}.back{display:block;text-align:center;color:#e9c46d;margin-top:18px}
 @media(max-width:600px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.panel{padding:16px}h1{font-size:22px}}
 </style>
 </head>
@@ -25,7 +38,7 @@ h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{
 <div class="grid">
 <div class="wide"><label for="project">المشروع المختار</label><select id="project" required>
 <option value="Wedding Card">Wedding Card</option><option value="Wedding Invitation">Wedding Invitation</option><option value="Wedding Envelope">Wedding Envelope</option><option value="Event Invitations">Event Invitations</option></select></div>
-<div class="wide"><label for="design">اختار التصميم</label><select id="design" required><option value="">اختار المشروع أولاً</option></select><p class="hint" id="designHint">اختار المشروع باش تظهرلك التصاميم المتوفرة.</p></div>
+<div class="wide"><label>اختار التصميم اللي عجبك</label><input id="design" type="hidden"><div id="designGallery" class="design-grid"></div><p class="hint" id="designHint">اختار المشروع باش تظهرلك صور التصاميم.</p></div>
 <div><label for="customer">اسمك</label><input id="customer" required placeholder="الاسم الكامل"></div>
 <div><label for="customerPhone">رقم WhatsApp تاعك</label><input id="customerPhone" type="tel" required placeholder="+213..."></div>
 <div class="wide"><label for="title">عنوان الدعوة / نوع المناسبة</label><input id="title" required placeholder="مثلاً: دعوة لحضور حفل الزفاف"></div>
@@ -45,20 +58,54 @@ h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{
 <a href="./" class="back">COLONY DIGITAL · دعوات رقمية لكل مناسباتكم</a>
 </main>
 <script>
-const designSelect=document.getElementById('design');
+const designGallery=document.getElementById('designGallery');
+const designInput=document.getElementById('design');
 const designHint=document.getElementById('designHint');
-const designOptions={'Wedding Invitation':12,'Wedding Envelope':4};
+const designOptions={
+ 'Wedding Invitation':[
+  ['floral','كلاسيكي بالورود','#b47b42','#fff4e4','#543725','❀ ✿ ❀'],
+  ['royal','ملكي فاخر','#d9b56e','#101d36','#fff0cc','✦ ♛ ✦'],
+  ['minimal','عصري وبسيط','#4b4b4b','#ffffff','#222222','— ✧ —'],
+  ['romance','رومانسي ناعم','#c87891','#fff0f4','#633846','♡ ❀ ♡'],
+  ['burgundy','خمري فاخر','#e0bd77','#4b1026','#fff1d7','✦ ❦ ✦'],
+  ['botanical','أخضر طبيعي','#567b58','#f4f6e9','#2d4934','❧ ♧ ❧'],
+  ['beach','تصميم بحري','#198b9a','#eafaff','#184a5a','≈ ☼ ≈'],
+  ['arch','إسلامي أنيق','#c5a15a','#f8f0dc','#234d43','۞ ✦ ۞'],
+  ['silver','كحلي وفضي','#c6d3e6','#101d37','#f2f5fb','✧ ✦ ✧'],
+  ['terracotta','تيراكوتا دافئ','#b9654b','#fff0e3','#60392c','❋ ❀ ❋'],
+  ['ornate','بنفسجي مزخرف','#d1b5f0','#24163a','#fff3ff','✧ ❦ ✧'],
+  ['blackgold','أسود وذهبي','#d8b45e','#101010','#fff8e7','✦ ♡ ✦']
+ ],
+ 'Wedding Envelope':[
+  ['romantic','رومانسي 🌹','#a84461','#f6d6d5','#702e43','✿ ❀ ✧'],
+  ['luxe','فاخر ✨','#855e2e','#f6e6bd','#67431f','✦ ❀ ✦'],
+  ['royal','ملكي 👑','#b89bd8','#201d35','#fff0d0','♛ ✦ ♛'],
+  ['garden','حديقة 🌿','#547b57','#d9e6c7','#304b37','❀ ❧ ❀']
+ ]
+};
+function chooseDesign(value){
+ designInput.value=value;
+ designGallery.querySelectorAll('.design-card').forEach(card=>card.classList.toggle('selected',card.dataset.value===value));
+}
 function refreshDesigns(){
  const selected=document.getElementById('project').value;
- const count=designOptions[selected];
- designSelect.innerHTML='';
- if(count){
-  designSelect.add(new Option('اختار التصميم',''));
-  for(let i=1;i<=count;i++) designSelect.add(new Option('التصميم '+i,'التصميم '+i));
-  designHint.textContent='متوفر '+count+' تصميمات لهذا المشروع. اختار التصميم اللي عجبك.';
+ const designs=designOptions[selected];
+ designGallery.innerHTML='';
+ designInput.value='';
+ if(designs){
+  designs.forEach(([id,name,accent,paper,ink,motif])=>{
+   const card=document.createElement('button');
+   card.type='button';card.className='design-card';card.dataset.value=id;
+   card.innerHTML='<div class="design-art" style="--accent:'+accent+';--paper:'+paper+';--ink:'+ink+'"><div class="design-art-inner"><div class="orn">'+motif+'</div><div class="sample-title">دعوة خاصة</div><div class="sample-names">اسم العريس<br>♥<br>اسم العروس</div><div class="sample-title">التاريخ · المكان</div><div class="orn">♡ ♡ ♡</div></div></div><strong>'+name+'</strong><small>اضغط لاختيار هذا التصميم</small>';
+   card.addEventListener('click',()=>chooseDesign(id));
+   designGallery.appendChild(card);
+  });
+  designHint.textContent='تقدر تشوف '+designs.length+' تصاميم مصغّرة. اضغط على الصورة اللي عجباتك.';
  }else{
-  designSelect.add(new Option('التصميم 1','التصميم 1'));
-  designHint.textContent='اختار التصميم 1 لهذا المشروع، وتقدر توضّح التفاصيل معانا عبر WhatsApp.';
+  const card=document.createElement('button');card.type='button';card.className='design-card';card.dataset.value='default';
+  card.innerHTML='<div class="design-art" style="--accent:#d9a943;--paper:#17120b;--ink:#fff2d5"><div class="design-art-inner"><div class="orn">✦ ♡ ✦</div><div class="sample-title">COLONY DIGITAL</div><div class="sample-names">دعوة مناسبتك</div><div class="sample-title">تصميم حسب المشروع</div></div></div><strong>التصميم الأساسي</strong><small>اضغط لاختياره</small>';
+  card.addEventListener('click',()=>chooseDesign('default'));designGallery.appendChild(card);
+  designHint.textContent='اختار النموذج الأساسي، ونكملوا التفاصيل معاك.';
  }
 }
 document.getElementById('project').addEventListener('change',refreshDesigns);
@@ -69,6 +116,7 @@ refreshDesigns();
 document.getElementById('orderForm').addEventListener('submit',e=>{
  e.preventDefault();
  const v=id=>document.getElementById(id).value.trim();
+ if(!v('design')){alert('اختار صورة التصميم اللي عجباتك قبل إرسال الطلب.');return;}
  const fields=[
  ['المشروع',v('project')],['التصميم',v('design')],['اسم الزبون',v('customer')],['رقم الزبون',v('customerPhone')],
  ['نوع المناسبة',v('title')],['الاسم الرئيسي',v('name1')],['الاسم الإضافي',v('name2')||'غير محدد'],
