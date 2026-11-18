@@ -42,7 +42,8 @@ h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{
 <div class="wide"><label>اختار التصميم اللي عجبك</label><input id="design" type="hidden"><div id="designGallery" class="design-grid"></div><p class="hint" id="designHint">اختار المشروع باش تظهرلك صور التصاميم.</p></div>
 <div><label for="customer">اسمك</label><input id="customer" required placeholder="الاسم الكامل"></div>
 <div><label for="customerPhone">رقم WhatsApp تاعك</label><input id="customerPhone" type="tel" required placeholder="+213..."></div>
-<div class="wide"><label for="title">عنوان الدعوة / نوع المناسبة</label><input id="title" required placeholder="مثلاً: دعوة لحضور حفل الزفاف"></div>
+<div class="wide" id="eventTypeWrap" hidden><label for="eventType">نوع المناسبة</label><select id="eventType"><option value="engagement">💍 خطوبة</option><option value="wedding">💒 زفاف</option><option value="birthday">🎂 عيد ميلاد</option><option value="baby">👶 استقبال مولود جديد</option><option value="aqiqah">🌙 عقيقة</option><option value="graduation">🎓 حفل تخرج</option><option value="henna">🌿 حنة</option><option value="party">🎉 مناسبة أخرى</option></select></div>
+<div class="wide"><label for="title">عنوان الدعوة</label><input id="title" required placeholder="مثلاً: دعوة لحضور حفل الزفاف"></div>
 <div><label for="name1">الاسم الرئيسي</label><input id="name1" required placeholder="اسم العريس أو صاحب المناسبة"></div>
 <div><label for="name2">اسم إضافي (اختياري)</label><input id="name2" placeholder="اسم العروس أو اسم آخر"></div>
 <div><label for="date">التاريخ</label><input id="date" type="date" required></div>
@@ -88,6 +89,7 @@ const designOptions={
 function updateOrderPreview(){
  const val=id=>document.getElementById(id).value.trim();
  const project=val('project'),design=val('design')||'default';
+ const eventType=document.getElementById('eventType').value;
  const base=new URL(project==='Wedding Card'?'https://card.colony.dpdns.org/':project==='Wedding Invitation'?'https://wedding.colony.dpdns.org/maker.html':project==='Wedding Envelope'?'https://envelope.colony.dpdns.org/':'https://event.colony.dpdns.org/');
  base.search='';
  const put=(k,v)=>{if(v)base.searchParams.set(k,v)};
@@ -100,7 +102,7 @@ function updateOrderPreview(){
   const data={groom:n1,bride:n2||'اسم العروس',date:val('date'),time:val('time'),venue:val('venue'),phone:val('eventPhone'),map:val('maps'),message:val('message'),theme:design};
   base.searchParams.set('data',JSON.stringify(data));
  }else{
-  put('eventType','party');put('title',val('title'));put('name1',n1);put('name2',n2);put('date',val('date'));put('time',val('time'));put('venue',val('venue'));put('phone',val('eventPhone'));put('maps',val('maps'));put('message',val('message'));
+  put('eventType',eventType);put('title',val('title'));put('name1',n1);put('name2',n2);put('date',val('date'));put('time',val('time'));put('venue',val('venue'));put('phone',val('eventPhone'));put('maps',val('maps'));put('message',val('message'));
  }
  document.getElementById('orderPreview').src=base.href;
 }
@@ -131,11 +133,14 @@ function refreshDesigns(){
  }
  updateOrderPreview();
 }
-document.getElementById('project').addEventListener('change',refreshDesigns);
+function updateProjectFields(){const isEvent=document.getElementById('project').value==='Event Invitations';document.getElementById('eventTypeWrap').hidden=!isEvent;updateOrderPreview();}
+document.getElementById('project').addEventListener('change',()=>{refreshDesigns();updateProjectFields()});
+document.getElementById('eventType').addEventListener('change',updateOrderPreview);
 const params=new URLSearchParams(location.search);
 const project=params.get('project');
 if(project){const select=document.getElementById('project');if([...select.options].some(o=>o.value===project))select.value=project;}
 refreshDesigns();
+updateProjectFields();
 document.getElementById('orderForm').querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',updateOrderPreview));
 document.getElementById('orderForm').addEventListener('submit',e=>{
  e.preventDefault();
@@ -144,7 +149,7 @@ document.getElementById('orderForm').addEventListener('submit',e=>{
  if(!document.getElementById('approvePreview').checked){alert('شوف المعاينة ووافق عليها قبل إرسال الطلب.');document.getElementById('approvePreview').focus();return;}
  const fields=[
  ['المشروع',v('project')],['التصميم المختار',v('design')],['الزبون وافق على المعاينة','نعم'],['اسم الزبون',v('customer')],['رقم الزبون',v('customerPhone')],
- ['نوع المناسبة',v('title')],['الاسم الرئيسي',v('name1')],['الاسم الإضافي',v('name2')||'غير محدد'],
+ ['نوع المناسبة',v('project')==='Event Invitations'?document.getElementById('eventType').selectedOptions[0].text:v('title')],['عنوان الدعوة',v('title')],['الاسم الرئيسي',v('name1')],['الاسم الإضافي',v('name2')||'غير محدد'],
  ['التاريخ',v('date')],['الساعة',v('time')],['المكان',v('venue')],['رقم WhatsApp في الدعوة',v('eventPhone')],
  ['Google Maps',v('maps')],['رسالة الدعوة',v('message')||'بدون رسالة']
  ];
