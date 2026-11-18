@@ -21,7 +21,21 @@ a{text-decoration:none;color:inherit}header{position:sticky;top:0;z-index:20;bac
 .gold-line{width:150px;height:2px;margin:25px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .section{max-width:1250px;margin:auto;padding:35px 20px 65px}.section-title{text-align:center;color:var(--light-gold);font-family:Georgia,serif;font-size:32px;margin-bottom:8px}.section-subtitle{text-align:center;color:#a99b80;margin-bottom:35px}
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.card{background:linear-gradient(145deg,#211a10,#100e0b);border:1px solid var(--gold);border-radius:20px;overflow:hidden;box-shadow:0 8px 25px #0008;transition:.3s}.card:hover{transform:translateY(-7px);box-shadow:0 12px 30px #b8893533}
-.art{height:185px;display:flex;justify-content:center;align-items:center;text-align:center;position:relative;background:radial-gradient(circle,#7c552b55,transparent 65%),linear-gradient(140deg,#17110a,#050505);border-bottom:1px solid #6d4b20}.art:before{content:"";position:absolute;inset:12px;border:1px solid #b88a42;border-radius:10px}.art-icon{font-size:65px;filter:drop-shadow(0 0 12px #d9ad55)}
+.art{height:185px;display:flex;justify-content:center;align-items:center;text-align:center;position:relative;background:radial-gradient(circle,#7c552b55,transparent 65%),linear-gradient(140deg,#17110a,#050505);border-bottom:1px solid #6d4b20}.art:before{content:"";position:absolute;inset:12px;border:1px solid #b88a42;border-radius:10px}
+.mockup{position:relative;width:116px;height:148px;padding:12px 9px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#f8eddd;color:#6a4930;border:2px solid #d4b16c;box-shadow:0 8px 22px #0009;transform:rotate(-3deg);z-index:1}
+.mockup:before{content:"";position:absolute;inset:5px;border:1px solid #bd9652;pointer-events:none}
+.mockup .mock-top{font-family:Georgia,serif;font-size:9px;letter-spacing:2px;color:#9a713c}
+.mockup .mock-orn{font-size:21px;color:#b58b4b;line-height:1.4}
+.mockup .mock-names{font-family:Georgia,serif;font-size:15px;font-weight:bold;line-height:1.4;color:#5a3825}
+.mockup .mock-small{font-size:7px;letter-spacing:1px;margin-top:5px;color:#8c7357}
+.mockup.card-design{background:linear-gradient(145deg,#fff8eb,#e9d4b4)}
+.mockup.invite-design{background:linear-gradient(145deg,#fff7f3,#efd1d0);border-color:#c78e88;color:#75434b;transform:rotate(2deg)}
+.mockup.invite-design:before{border-color:#c78e88}
+.mockup.envelope-design{width:138px;height:94px;margin-top:22px;background:linear-gradient(145deg,#f5e5c4,#d6b67c);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);transform:rotate(-2deg)}
+.mockup.envelope-design:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 49%,#c6a36a 50%,transparent 51%),linear-gradient(35deg,transparent 49%,#c6a36a 50%,transparent 51%);pointer-events:none}
+.mockup.event-design{background:linear-gradient(145deg,#171626,#37304d);color:#f6e5bd;border-color:#d5b56d;transform:rotate(2deg)}
+.mockup.event-design .mock-names{color:#f6e5bd}
+
 .card-content{padding:18px;text-align:center}.card h3{color:var(--light-gold);font-size:19px;min-height:44px;margin:0 0 13px}.price{font-size:27px;font-weight:bold;color:white;margin:10px 0}.duration{color:var(--gold);font-size:14px;margin-bottom:18px}.actions{display:flex;flex-direction:column;gap:9px}
 .btn{display:block;padding:12px 8px;border-radius:30px;text-align:center;font-weight:bold;cursor:pointer;transition:.2s}.btn-demo{border:1px solid var(--gold);color:var(--light-gold)}.btn-order{background:linear-gradient(110deg,#b27a23,#f3ce79);color:#171008}.btn:hover{filter:brightness(1.15)}
 .features{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;border-top:1px solid #705225;border-bottom:1px solid #705225;padding:25px 10px;text-align:center;color:#e7d9bd}.feature-icon{display:block;font-size:27px;margin-bottom:8px;color:var(--gold)}
@@ -52,10 +66,10 @@ footer{text-align:center;padding:25px 15px;color:#9e8965;border-top:1px solid #4
 <footer><strong>♛ COLONY DIGITAL</strong><p data-i="footer">© 2026 COLONY DIGITAL. All Rights Reserved.</p></footer>
 <script>
 const projects=[
-{name:"Wedding Card",icon:"💍",domain:"https://card.colony.dpdns.org/"},
-{name:"Wedding Invitation",icon:"💒",domain:"https://wedding.colony.dpdns.org/"},
-{name:"Wedding Envelope",icon:"✉️",domain:"https://envelope.colony.dpdns.org/"},
-{name:"Event Invitation",icon:"🎉",domain:"https://event.colony.dpdns.org/"}
+{name:"Wedding Card",id:"card",demo:"https://card.colony.dpdns.org/?groom=HANI&bride=TIZIGHI&date=2027-11-20&time=20%3A00&venue=Oran",},
+{name:"Wedding Invitation",id:"invite",demo:"https://wedding.colony.dpdns.org/invitation-template.html?groom=HANI&bride=TIZIGHI&date=2027-11-20&time=20%3A00&venue=Oran&phone=213793400678"},
+{name:"Wedding Envelope",id:"envelope",demo:"https://envelope.colony.dpdns.org/?data="+encodeURIComponent(JSON.stringify({bride:"TIZIGHI",groom:"HANI",date:"2027-11-20T20:00",time:"20:00",venue:"Oran",phone:"213793400678",theme:"romantic",message:"We are delighted to invite you to celebrate with us."}))},
+{name:"Event Invitation",id:"event",demo:"https://event.colony.dpdns.org/"}
 ];
 const translations={
 en:{home:"Home",services:"Our Services",about:"About Us",contact:"Contact",tagline:"Your Digital Experience Starts Here",intro:"Discover our digital invitation collections",special:"✦ Make Your Special Moments Unforgettable ✦",title:"Our Projects",subtitle:"Choose the perfect invitation for your special occasion",demo:"View Demo",order:"Order Now",duration:"30 Days",feature1:"Quality Designs",feature2:"Instant Delivery",feature3:"Professional Support",feature4:"Your Satisfaction",contactTitle:"Contact COLONY DIGITAL",contactIntro:"We are here to help you!",footer:"© 2026 COLONY DIGITAL. All Rights Reserved.",message:"Hello COLONY DIGITAL! I am interested in ordering: "},
@@ -69,7 +83,7 @@ return "https://wa.me/213793400678?text="+encodeURIComponent(message);
 }
 function renderProducts(){
 const t=translations[currentLanguage];
-document.getElementById("products").innerHTML=projects.map(p=>'<article class="card"><div class="art"><span class="art-icon">'+p.icon+'</span></div><div class="card-content"><h3>'+p.name+'</h3><div class="price">1000 DA</div><div class="duration">◷ '+t.duration+'</div><div class="actions"><a class="btn btn-demo" href="'+p.domain+'" target="_blank" rel="noopener">'+t.demo+'</a><a class="btn btn-order" href="'+makeOrderLink(p.name)+'" target="_blank" rel="noopener">'+t.order+'</a></div></div></article>').join("");
+document.getElementById("products").innerHTML=projects.map(p=>'<article class="card"><div class="art"><div class="mockup '+({card:"card-design",invite:"invite-design",envelope:"envelope-design",event:"event-design"}[p.id])+'"><span class="mock-top">SPECIAL INVITATION</span><span class="mock-orn">✦ ❀ ✦</span><span class="mock-names">HANI<br>&<br>TIZIGHI</span><span class="mock-small">YOU ARE INVITED</span></div></div><div class="card-content"><h3>'+p.name+'</h3><div class="price">1000 DA</div><div class="duration">◷ '+t.duration+'</div><div class="actions"><a class="btn btn-demo" href="'+p.demo+'" target="_blank" rel="noopener">'+t.demo+'</a><a class="btn btn-order" href="'+makeOrderLink(p.name)+'" target="_blank" rel="noopener">'+t.order+'</a></div></div></article>').join("");
 }
 function setLanguage(lang){
 currentLanguage=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
