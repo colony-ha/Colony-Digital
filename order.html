@@ -21,6 +21,7 @@ h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{
 .design-art .sample-title{font-size:10px;letter-spacing:1px;margin:5px 0}
 .design-art .sample-names{font-size:14px;font-weight:bold;color:var(--accent);overflow-wrap:anywhere}
 .design-card strong{display:block;font-size:12px;margin:8px 0 2px;color:var(--gold2)}
+.preview-box{margin-top:22px;padding:15px;border:1px solid var(--line);border-radius:15px;background:#090705}.preview-box h2{margin:0 0 8px;color:var(--gold2);font-size:19px}.preview-frame{width:100%;height:720px;border:1px solid #74572c;border-radius:12px;background:#fff;display:block}.approval{display:flex;align-items:flex-start;gap:10px;margin-top:14px;padding:13px;border:1px solid #74572c;border-radius:10px;background:#100c07;line-height:1.8}.approval input{width:20px;height:20px;accent-color:var(--gold);margin-top:2px;flex:none}.approval label{margin:0;color:#fff0cf;font-size:13px}
 .design-card small{display:block;font-size:10px;color:#bca77e}
 @media(max-width:600px){.design-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.design-art{height:135px}}
 .submit{width:100%;margin-top:18px;padding:15px;border:0;border-radius:30px;background:linear-gradient(110deg,#b57920,#f6cf70);color:#171006;font-weight:bold;font-size:16px;cursor:pointer}.back{display:block;text-align:center;color:#e9c46d;margin-top:18px}
@@ -51,6 +52,7 @@ h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{
 <div class="wide"><label for="maps">رابط الموقع على Google Maps</label><input id="maps" type="url" required placeholder="https://maps.app.goo.gl/..."></div>
 <div class="wide"><label for="message">رسالة الدعوة (اختياري)</label><textarea id="message" placeholder="اكتب الرسالة التي تريد ظهورها في الدعوة"></textarea></div>
 </div>
+<div class="preview-box wide"><h2>👀 معاينة طلبك قبل الإرسال</h2><p class="hint">هذه معاينة للتصميم المختار بالمعلومات التي أدخلتها. أي تغيير تديره في الخانات راح يبان هنا.</p><iframe id="orderPreview" class="preview-frame" title="معاينة الدعوة قبل إرسال الطلب"></iframe><div class="approval"><input id="approvePreview" type="checkbox" required><label for="approvePreview">راجعت المعاينة وكل المعلومات صحيحة، وأوافق على التصميم والتفاصيل قبل إرسال الطلب.</label></div></div>
 <p class="hint">السعر: 1000 دج · مدة صلاحية الرابط بعد التفعيل: 30 يوماً. إرسال الطلب لا يعني الدفع أو التفعيل؛ نتواصل معاك أولاً لتأكيد التفاصيل.</p>
 <button class="submit" type="submit">إرسال الطلب عبر WhatsApp</button>
 </form>
@@ -83,9 +85,29 @@ const designOptions={
   ['garden','حديقة 🌿','#547b57','#d9e6c7','#304b37','❀ ❧ ❀']
  ]
 };
+function updateOrderPreview(){
+ const val=id=>document.getElementById(id).value.trim();
+ const project=val('project'),design=val('design')||'default';
+ const base=new URL(project==='Wedding Card'?'https://card.colony.dpdns.org/':project==='Wedding Invitation'?'https://wedding.colony.dpdns.org/maker.html':project==='Wedding Envelope'?'https://envelope.colony.dpdns.org/':'https://event.colony.dpdns.org/');
+ base.search='';
+ const put=(k,v)=>{if(v)base.searchParams.set(k,v)};
+ const n1=val('name1')||'اسم صاحب المناسبة',n2=val('name2');
+ if(project==='Wedding Card'){
+  put('groom',n1);put('bride',n2||'اسم العروس');put('date',val('date'));put('time',val('time'));put('venue',val('venue'));put('phone',val('eventPhone'));put('maps',val('maps'));put('message',val('message'));
+ }else if(project==='Wedding Invitation'){
+  put('view','invite');put('groom',n1);put('bride',n2||'اسم العروس');put('date',val('date'));put('time',val('time'));put('venue',val('venue'));put('phone',val('eventPhone'));put('maps',val('maps'));put('message',val('message'));put('style',design);put('lang','ar');
+ }else if(project==='Wedding Envelope'){
+  const data={groom:n1,bride:n2||'اسم العروس',date:val('date'),time:val('time'),venue:val('venue'),phone:val('eventPhone'),map:val('maps'),message:val('message'),theme:design};
+  base.searchParams.set('data',JSON.stringify(data));
+ }else{
+  put('eventType','party');put('title',val('title'));put('name1',n1);put('name2',n2);put('date',val('date'));put('time',val('time'));put('venue',val('venue'));put('phone',val('eventPhone'));put('maps',val('maps'));put('message',val('message'));
+ }
+ document.getElementById('orderPreview').src=base.href;
+}
 function chooseDesign(value){
  designInput.value=value;
  designGallery.querySelectorAll('.design-card').forEach(card=>card.classList.toggle('selected',card.dataset.value===value));
+ updateOrderPreview();
 }
 function refreshDesigns(){
  const selected=document.getElementById('project').value;
@@ -107,18 +129,21 @@ function refreshDesigns(){
   card.addEventListener('click',()=>chooseDesign('default'));designGallery.appendChild(card);
   designHint.textContent='اختار النموذج الأساسي، ونكملوا التفاصيل معاك.';
  }
+ updateOrderPreview();
 }
 document.getElementById('project').addEventListener('change',refreshDesigns);
 const params=new URLSearchParams(location.search);
 const project=params.get('project');
 if(project){const select=document.getElementById('project');if([...select.options].some(o=>o.value===project))select.value=project;}
 refreshDesigns();
+document.getElementById('orderForm').querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',updateOrderPreview));
 document.getElementById('orderForm').addEventListener('submit',e=>{
  e.preventDefault();
  const v=id=>document.getElementById(id).value.trim();
  if(!v('design')){alert('اختار صورة التصميم اللي عجباتك قبل إرسال الطلب.');return;}
+ if(!document.getElementById('approvePreview').checked){alert('شوف المعاينة ووافق عليها قبل إرسال الطلب.');document.getElementById('approvePreview').focus();return;}
  const fields=[
- ['المشروع',v('project')],['التصميم',v('design')],['اسم الزبون',v('customer')],['رقم الزبون',v('customerPhone')],
+ ['المشروع',v('project')],['التصميم المختار',v('design')],['الزبون وافق على المعاينة','نعم'],['اسم الزبون',v('customer')],['رقم الزبون',v('customerPhone')],
  ['نوع المناسبة',v('title')],['الاسم الرئيسي',v('name1')],['الاسم الإضافي',v('name2')||'غير محدد'],
  ['التاريخ',v('date')],['الساعة',v('time')],['المكان',v('venue')],['رقم WhatsApp في الدعوة',v('eventPhone')],
  ['Google Maps',v('maps')],['رسالة الدعوة',v('message')||'بدون رسالة']
