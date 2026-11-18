@@ -61,7 +61,28 @@ footer{text-align:center;padding:12px;color:#9d8358;border-top:1px solid #4b3517
 <div class="contact-box"><h3>✉ Email</h3><a href="mailto:colonyus666@gmail.com">colonyus666@gmail.com</a></div>
 <div class="brand-note"><b>COLONY DIGITAL</b><span data-i="brandNote">Together, let's create magic ✨</span></div>
 </div></section>
-</main><div class="admin-modal" id="adminModal" role="dialog" aria-modal="true"><div class="admin-box"><h2>♛ Admin Login</h2><p>COLONY DIGITAL · لوحة الإدارة</p><form id="adminLoginForm"><label for="adminUsername">اسم المستخدم</label><input id="adminUsername" name="username" autocomplete="username" required placeholder="Admin username"><label for="adminPassword">كلمة المرور</label><input id="adminPassword" name="password" type="password" autocomplete="current-password" required placeholder="Password"><div class="admin-actions"><button class="admin-submit" type="submit">تسجيل الدخول</button><button class="admin-close" type="button" onclick="closeAdminLogin()">إغلاق</button></div></form><p>دخول مخصص للإدارة فقط</p></div></div>
+</main><div class="admin-modal" id="adminModal" role="dialog" aria-modal="true"><div class="admin-box"><h2>♛ Admin Login</h2><p>COLONY DIGITAL · لوحة الإدارة</p><form id="adminLoginForm"><label for="adminUsername">اسم المستخدم</label><input id="adminUsername" name="username" autocomplete="username" required placeholder="Admin username"><label for="adminPassword">كلمة المرور</label><input id="adminPassword" name="password" type="password" autocomplete="current-password" required placeholder="Password"><div class="admin-actions"><button class="admin-submit" type="submit">تسجيل الدخول</button><button class="admin-close" type="button" onclick="closeAdminLogin()">إغلاق</button></div></form><p id="adminLoginStatus" role="status">دخول مخصص للإدارة فقط</p></div></div>
+
+<div class="admin-modal" id="adminDashboard" role="dialog" aria-modal="true">
+ <div class="admin-box" style="width:min(760px,100%)">
+  <h2>♛ COLONY DIGITAL · مركز الإدارة</h2>
+  <p>مرحباً بك. اختر المشروع الذي تريد إدارة طلباته.</p>
+  <div class="admin-projects">
+   <a href="https://card.colony.dpdns.org/" target="_blank" rel="noopener">Wedding Card</a>
+   <a href="https://wedding.colony.dpdns.org/maker.html" target="_blank" rel="noopener">Wedding Invitation</a>
+   <a href="https://envelope.colony.dpdns.org/" target="_blank" rel="noopener">Wedding Envelope</a>
+   <a href="https://event.colony.dpdns.org/maker.html" target="_blank" rel="noopener">Event Invitation</a>
+  </div>
+  <div class="admin-actions"><button class="admin-submit" type="button" onclick="adminLogout()">تسجيل الخروج</button></div>
+ </div>
+</div>
+<style>
+.admin-projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+.admin-projects a{display:block;padding:18px 10px;border:1px solid #c99a42;border-radius:14px;color:#f4d27d;background:#100c06;font-weight:bold}
+.admin-projects a:hover{background:#30200b}
+#adminLoginStatus{min-height:22px;color:#ffd37a;font-size:14px}
+@media(max-width:500px){.admin-projects{grid-template-columns:1fr}}
+</style>
 <footer><strong>♛ COLONY DIGITAL</strong> · <span data-i="footer">© 2026 COLONY DIGITAL. All Rights Reserved.</span></footer>
 <script>
 const projects=[
@@ -85,7 +106,52 @@ function setLanguage(lang){currentLanguage=lang;document.documentElement.lang=la
 function openAdminLogin(){document.getElementById("adminModal").classList.add("open");document.getElementById("adminUsername").focus()}
 function closeAdminLogin(){document.getElementById("adminModal").classList.remove("open")}
 document.getElementById("adminModal").addEventListener("click",function(e){if(e.target===this)closeAdminLogin()});
-document.getElementById("adminLoginForm").addEventListener("submit",function(e){e.preventDefault();alert("واجهة الدخول جاهزة. الخطوة التالية ربطها بالتحقق الآمن.");});
+const ADMIN_API = "https://colony-admin-api.colonyus666.workers.dev";
+const ADMIN_SESSION_KEY = "colony_admin_session";
+function showAdminStatus(message){document.getElementById("adminLoginStatus").textContent=message}
+function showAdminDashboard(){closeAdminLogin();document.getElementById("adminDashboard").classList.add("open")}
+async function verifyAdminSession(){
+ const token=sessionStorage.getItem(ADMIN_SESSION_KEY);
+ if(!token)return;
+ try{
+  const response=await fetch(ADMIN_API+"/verify",{method:"POST",headers:{Authorization:"Bearer "+token}});
+  const result=await response.json();
+  if(response.ok&&result.success&&result.authenticated)showAdminDashboard();
+  else sessionStorage.removeItem(ADMIN_SESSION_KEY);
+ }catch(error){sessionStorage.removeItem(ADMIN_SESSION_KEY)}
+}
+document.getElementById("adminLoginForm").addEventListener("submit",async function(e){
+ e.preventDefault();
+ const username=document.getElementById("adminUsername").value.trim();
+ const password=document.getElementById("adminPassword").value;
+ const submit=this.querySelector('button[type="submit"]');
+ submit.disabled=true;submit.textContent="جارٍ التحقق...";
+ showAdminStatus("لحظة من فضلك...");
+ try{
+  const response=await fetch(ADMIN_API+"/login",{
+   method:"POST",headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({username,password})
+  });
+  const result=await response.json();
+  if(!response.ok||!result.success||!result.token){
+   showAdminStatus(result.message||"تعذر تسجيل الدخول. تحقق من البيانات.");
+   return;
+  }
+  sessionStorage.setItem(ADMIN_SESSION_KEY,result.token);
+  document.getElementById("adminPassword").value="";
+  this.reset();showAdminDashboard();
+ }catch(error){
+  showAdminStatus("تعذر الاتصال بخدمة الإدارة. تأكد أن Worker منشور.");
+ }finally{
+  submit.disabled=false;submit.textContent="تسجيل الدخول";
+ }
+});
+function adminLogout(){
+ sessionStorage.removeItem(ADMIN_SESSION_KEY);
+ document.getElementById("adminDashboard").classList.remove("open");
+}
+document.getElementById("adminDashboard").addEventListener("click",function(e){if(e.target===this)adminLogout()});
 renderProducts();
+verifyAdminSession();
 </script>
 </body></html>
