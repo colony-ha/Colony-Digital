@@ -1,101 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080706">
-<meta name="description" content="COLONY DIGITAL - Premium digital wedding and event invitations.">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050403"><meta name="description" content="COLONY DIGITAL - Premium digital wedding and event invitations.">
 <title>COLONY DIGITAL | Premium Digital Invitations</title>
 <style>
-:root{--gold:#d9ad55;--light-gold:#f5d994;--black:#080706;--white:#f7f0df}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--black);color:var(--white);font-family:Arial,sans-serif}
-a{text-decoration:none;color:inherit}header{position:sticky;top:0;z-index:20;background:rgba(8,7,6,.96);border-bottom:1px solid #755321;backdrop-filter:blur(12px)}
-.nav{max-width:1250px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.logo{color:var(--gold);font-family:Georgia,serif;font-size:28px;font-weight:bold;letter-spacing:3px}.logo small{display:block;text-align:center;font-size:11px;letter-spacing:7px}
-.nav-links{display:flex;gap:22px;font-size:14px}.nav-links a:hover{color:var(--gold)}
-.languages{display:flex;gap:5px;border:1px solid #765a2c;padding:5px;border-radius:30px}.languages button{border:0;color:white;background:transparent;padding:8px 11px;border-radius:20px;cursor:pointer}.languages button.active{background:var(--gold);color:#171008;font-weight:bold}
-.hero{min-height:350px;padding:65px 20px 45px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#51371155,transparent 65%),linear-gradient(135deg,#100d08,#080706)}
-.hero:before,.hero:after{content:"✦";position:absolute;color:#b88935;font-size:100px;opacity:.16}.hero:before{left:8%;top:25px}.hero:after{right:8%;bottom:15px}
-.crown{font-size:62px;color:var(--gold);line-height:1}.hero h1{color:var(--light-gold);font-family:Georgia,serif;font-size:clamp(36px,6vw,67px);letter-spacing:3px;margin:12px 0}
-.hero .tagline{color:var(--gold);font-family:Georgia,serif;font-style:italic;font-size:clamp(19px,3vw,30px)}.hero p{color:#d9cdb6;margin-top:20px;font-size:16px}
-.gold-line{width:150px;height:2px;margin:25px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.section{max-width:1250px;margin:auto;padding:35px 20px 65px}.section-title{text-align:center;color:var(--light-gold);font-family:Georgia,serif;font-size:32px;margin-bottom:8px}.section-subtitle{text-align:center;color:#a99b80;margin-bottom:35px}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.card{background:linear-gradient(145deg,#211a10,#100e0b);border:1px solid var(--gold);border-radius:20px;overflow:hidden;box-shadow:0 8px 25px #0008;transition:.3s}.card:hover{transform:translateY(-7px);box-shadow:0 12px 30px #b8893533}
-.art{height:185px;display:flex;justify-content:center;align-items:center;text-align:center;position:relative;background:radial-gradient(circle,#7c552b55,transparent 65%),linear-gradient(140deg,#17110a,#050505);border-bottom:1px solid #6d4b20}.art:before{content:"";position:absolute;inset:12px;border:1px solid #b88a42;border-radius:10px}
-.mockup{position:relative;width:116px;height:148px;padding:12px 9px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#f8eddd;color:#6a4930;border:2px solid #d4b16c;box-shadow:0 8px 22px #0009;transform:rotate(-3deg);z-index:1}
-.mockup:before{content:"";position:absolute;inset:5px;border:1px solid #bd9652;pointer-events:none}
-.mockup .mock-top{font-family:Georgia,serif;font-size:9px;letter-spacing:2px;color:#9a713c}
-.mockup .mock-orn{font-size:21px;color:#b58b4b;line-height:1.4}
-.mockup .mock-names{font-family:Georgia,serif;font-size:15px;font-weight:bold;line-height:1.4;color:#5a3825}
-.mockup .mock-small{font-size:7px;letter-spacing:1px;margin-top:5px;color:#8c7357}
-.mockup.card-design{background:linear-gradient(145deg,#fff8eb,#e9d4b4)}
-.mockup.invite-design{background:radial-gradient(circle at 50% 18%,#354765,#111b31 68%);border:2px solid #d8b56d;color:#f5e6bd;transform:rotate(2deg);box-shadow:0 8px 24px #000b}
-.mockup.invite-design:before{border:1px solid #d8b56d;inset:6px}
-.mockup.invite-design .mock-top{color:#e4c77f;letter-spacing:1.5px}
-.mockup.invite-design .mock-orn{color:#d8b56d}
-.mockup.invite-design .mock-names{color:#fff0c9;font-size:16px}
-.mockup.invite-design .mock-small{color:#d9c59a}
-.mockup.envelope-design{width:138px;height:94px;margin-top:22px;background:linear-gradient(145deg,#f5e5c4,#d6b67c);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);transform:rotate(-2deg)}
-.mockup.envelope-design:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 49%,#c6a36a 50%,transparent 51%),linear-gradient(35deg,transparent 49%,#c6a36a 50%,transparent 51%);pointer-events:none}
-.mockup.event-design{background:linear-gradient(145deg,#171626,#37304d);color:#f6e5bd;border-color:#d5b56d;transform:rotate(2deg)}
-.mockup.event-design .mock-names{color:#f6e5bd}
-
-.card-content{padding:18px;text-align:center}.card h3{color:var(--light-gold);font-size:19px;min-height:44px;margin:0 0 13px}.price{font-size:27px;font-weight:bold;color:white;margin:10px 0}.duration{color:var(--gold);font-size:14px;margin-bottom:18px}.actions{display:flex;flex-direction:column;gap:9px}
-.btn{display:block;padding:12px 8px;border-radius:30px;text-align:center;font-weight:bold;cursor:pointer;transition:.2s}.btn-demo{border:1px solid var(--gold);color:var(--light-gold)}.btn-order{background:linear-gradient(110deg,#b27a23,#f3ce79);color:#171008}.btn:hover{filter:brightness(1.15)}
-.features{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;border-top:1px solid #705225;border-bottom:1px solid #705225;padding:25px 10px;text-align:center;color:#e7d9bd}.feature-icon{display:block;font-size:27px;margin-bottom:8px;color:var(--gold)}
-.contact{background:linear-gradient(120deg,#171109,#080706);border-top:1px solid #72501f;padding:45px 20px}.contact-inner{max-width:1100px;margin:auto}.contact h2{text-align:center;color:var(--light-gold);font-family:Georgia,serif;font-size:32px}
-.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}.contact-box{border:1px solid #705225;border-radius:15px;padding:22px 15px;text-align:center;background:#17130e}.contact-box h3{color:var(--gold)}.contact-box a{display:block;padding:8px;color:#e8dfce;font-size:14px;overflow-wrap:anywhere}.contact-box a:hover{color:var(--gold)}
-footer{text-align:center;padding:25px 15px;color:#9e8965;border-top:1px solid #453319;font-size:13px}footer strong{color:var(--gold)}
-@media(max-width:900px){.products{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.nav{justify-content:center}.nav-links{width:100%;justify-content:center;flex-wrap:wrap}.products{grid-template-columns:1fr}.card{max-width:420px;width:100%;margin:auto}.contact-grid{grid-template-columns:1fr}.features{grid-template-columns:repeat(2,1fr)}.hero{padding-top:45px}}
-[dir="rtl"] .nav{direction:rtl}
+:root{--gold:#d9a943;--gold2:#f7d77e;--ink:#050403;--cream:#fff4d8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#050403;color:#fff5df;font-family:Arial,Helvetica,sans-serif}a{color:inherit;text-decoration:none}
+header{height:100px;position:sticky;top:0;z-index:20;background:rgba(4,3,2,.97);border-bottom:1px solid #6e4b1c}
+.nav{max-width:1500px;height:100%;margin:auto;padding:12px 3%;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo{display:flex;align-items:center;gap:14px;color:var(--gold2);font: bold clamp(25px,3vw,43px) Georgia,serif;letter-spacing:3px;white-space:nowrap;text-shadow:0 0 16px #d9a94355}.logo-crown{font-size:54px;line-height:1}.logo small{display:block;text-align:center;font: bold 13px Georgia,serif;letter-spacing:8px;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:clamp(14px,2.5vw,38px);font-size:16px;white-space:nowrap}.nav-links a{padding:12px 4px;border-bottom:2px solid transparent}.nav-links a:first-child,.nav-links a:hover{color:var(--gold2);border-color:var(--gold)}
+.nav-links .ico{font-size:20px;margin-right:8px;color:var(--gold2)}
+.languages{display:flex;gap:3px;border:1px solid #98702e;border-radius:30px;padding:4px;white-space:nowrap}.languages button{border:0;background:transparent;color:#fff1d0;border-radius:22px;padding:9px 12px;font-size:14px;cursor:pointer}.languages button.active{background:linear-gradient(120deg,#a96f19,#f5ce6e);color:#100b03;font-weight:bold}
+.hero{height:295px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(ellipse at 50% 45%,#5a3a1055,transparent 43%),radial-gradient(ellipse at 85% 90%,#a5681530,transparent 35%),linear-gradient(180deg,#0b0804,#050403)}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 8% 20%,#e5b94b55 0 1px,transparent 3px),radial-gradient(circle at 90% 70%,#e5b94b88 0 1px,transparent 3px),radial-gradient(circle at 76% 15%,#e5b94b55 0 1px,transparent 3px);background-size:120px 90px;opacity:.6}
+.hero-side{position:absolute;top:0;height:100%;width:26%;display:flex;align-items:center;justify-content:center;pointer-events:none}.hero-left{left:0;background:radial-gradient(ellipse at 10% 65%,#d3a24b44,transparent 65%)}.hero-right{right:0;background:radial-gradient(ellipse at 90% 65%,#d3a24b33,transparent 65%)}
+.rose{font-size:clamp(65px,10vw,130px);filter:drop-shadow(0 8px 12px #000);transform:rotate(-16deg)}.rings{font-size:clamp(35px,5vw,65px);position:absolute;bottom:20px;left:20%;filter:drop-shadow(0 0 12px #d9a943)}
+.side-script{font:italic clamp(23px,3vw,42px) cursive;color:#e9bd62;line-height:1.12;transform:rotate(-8deg);text-shadow:0 0 15px #a46d20}
+.hero-main{position:relative;z-index:2;max-width:760px;padding:10px 20px}.hero-crown{font-size:62px;line-height:.9;color:var(--gold);text-shadow:0 0 20px #d9a94366}.hero h1{font: bold clamp(38px,5vw,68px) Georgia,serif;letter-spacing:2px;color:#f5d47e;margin:5px 0 0;text-shadow:0 3px 10px #9b641c88}.hero-tag{font:italic clamp(23px,3.3vw,43px) cursive;color:#f0c45f;white-space:nowrap}.hero p{font-size:19px;color:#eee0c6;margin:10px 0}.hero-rule{height:2px;width:min(490px,80%);margin:22px auto 0;background:linear-gradient(90deg,transparent,#d8a642,transparent);position:relative}.hero-rule:after{content:"◇";position:absolute;left:50%;top:-13px;transform:translateX(-50%);font-size:25px;color:var(--gold2);background:#0a0703;padding:0 10px}
+.projects{max-width:1500px;margin:auto;padding:0 2.4% 18px}.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.card{overflow:hidden;border:2px solid #c7973b;border-radius:25px;background:linear-gradient(150deg,#17120b,#050403 75%);box-shadow:0 8px 22px #000b,0 0 15px #d9a9431c;transition:transform .25s,box-shadow .25s}.card:hover{transform:translateY(-5px);box-shadow:0 12px 28px #b77a2c44}
+.art{height:195px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 65%,#a77a3444,transparent 65%),linear-gradient(135deg,#17120c,#030303)}
+.art:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 10% 15%,#ffe4a7 0 1px,transparent 3px),radial-gradient(circle at 85% 22%,#f4c56a 0 1px,transparent 3px),radial-gradient(circle at 20% 85%,#f4c56a 0 1px,transparent 3px);background-size:50px 45px;opacity:.55}
+.art-card{background:radial-gradient(ellipse at 20% 55%,#d6b26b55,transparent 40%),linear-gradient(135deg,#24201b,#030303)}.art-invite{background:radial-gradient(circle at 80% 45%,#8a101b88,transparent 35%),radial-gradient(circle at 15% 80%,#6b071188,transparent 35%),linear-gradient(135deg,#1b0508,#030303)}.art-envelope{background:radial-gradient(ellipse at 20% 85%,#e9d6a555,transparent 38%),linear-gradient(140deg,#18130d,#020202)}.art-event{background:radial-gradient(ellipse at 75% 60%,#d9a43e55,transparent 50%),linear-gradient(130deg,#211509,#030303)}
+.invite-paper{position:relative;z-index:1;width:62%;height:83%;background:linear-gradient(145deg,#15131a,#030306);border:2px solid #c89b4d;box-shadow:0 9px 18px #000;transform:rotate(-5deg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#e9c778;padding:10px}.invite-paper:before{content:"";position:absolute;inset:7px;border:1px solid #b88b43}.paper-orn{font-size:23px;line-height:1.1}.paper-monogram{font:italic 27px Georgia,serif;border:1px solid #c89b4d;border-radius:50%;width:56px;height:56px;display:grid;place-items:center;margin:5px}.paper-name{font:italic 18px Georgia,serif}.paper-caption{font-size:8px;letter-spacing:2px;margin-top:5px}
+.phone{position:relative;z-index:1;height:91%;width:43%;border:5px solid #171717;border-radius:23px;background:linear-gradient(155deg,#120c0d,#030303);box-shadow:0 8px 20px #000;transform:rotate(-8deg);display:flex;align-items:center;justify-content:center;text-align:center;color:#f1d28a}.phone:before{content:"";position:absolute;top:4px;width:36px;height:5px;background:#333;border-radius:8px}.phone-inner{border:1px solid #b88b43;margin:9px;padding:12px 5px;width:88%;height:85%;display:flex;flex-direction:column;justify-content:center;align-items:center}.phone-title{font:italic 23px cursive}.phone-rings{font-size:26px}
+.envelope{position:relative;z-index:1;width:78%;height:60%;background:linear-gradient(145deg,#24202a,#08070b);border:2px solid #d3ae62;box-shadow:0 12px 20px #000;transform:rotate(-4deg);clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}.envelope:before,.envelope:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 49.3%,#c79c50 50%,transparent 50.8%),linear-gradient(35deg,transparent 49.3%,#c79c50 50%,transparent 50.8%)}.seal{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,#e7c879,#8f5e20);border:2px solid #f0d28b;color:#39230a;display:grid;place-items:center;font-size:20px}
+.event-paper{position:relative;z-index:1;width:63%;height:82%;background:linear-gradient(145deg,#17131c,#060509);border:2px solid #d4ad60;box-shadow:0 8px 20px #000;transform:rotate(4deg);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#f1d58f}.event-paper:before{content:"";position:absolute;inset:6px;border:1px solid #b98d46}.event-title{font:italic 24px cursive}.event-bow{font-size:29px}
+.card-content{padding:9px 15px 14px;text-align:center}.card h3{color:#f1c65e;font-size:21px;margin:0 0 9px;white-space:nowrap}.card h3 .symbol{font-size:22px;margin-right:8px;color:#e9b84f}.price-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:13px}.price{font-size:27px;font-weight:800;color:#fff}.duration{font-size:15px;color:#e9dfca;border-left:1px solid #c79b4d;padding-left:14px}.duration b{color:#e6b64f;font-size:18px;margin-right:4px}
+.actions{display:flex;gap:8px;justify-content:center}.btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;border-radius:24px;padding:11px 8px;font-size:14px;font-weight:bold;white-space:nowrap;transition:.2s}.btn-demo{border:1.5px solid #d5a64b;color:#f7e7c5}.btn-order{background:linear-gradient(110deg,#b57920,#f6cf70);color:#171006;box-shadow:0 2px 10px #d39a3c44}.btn:hover{filter:brightness(1.2);transform:translateY(-1px)}
+.features{max-width:1450px;margin:0 auto;border-top:1px solid #6d4b20;border-bottom:1px solid #6d4b20;padding:17px 3%;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;text-align:center}.feature{font-size:17px;color:#eee2ca;border-right:1px solid #a17b3e;padding:0 8px}.feature:last-child{border:0}.feature-icon{font-size:31px;color:#e5b64e;vertical-align:middle;margin-right:12px}
+.contact{position:relative;overflow:hidden;padding:20px 3% 24px;background:radial-gradient(ellipse at 5% 80%,#9c661b33,transparent 35%),radial-gradient(ellipse at 95% 70%,#9c661b33,transparent 35%),#070503}.contact-inner{max-width:1400px;margin:auto;display:grid;grid-template-columns:1.1fr 1fr 1fr 1.2fr;gap:18px;align-items:center}.contact-cta{border-radius:35px;background:linear-gradient(110deg,#b57920,#f5cf70);color:#100b04;padding:16px 20px;text-align:center;box-shadow:0 0 20px #d39a3c33}.contact-cta strong{font-size:20px;display:block}.contact-cta em{font:italic 16px cursive}.contact-box{min-height:76px;text-align:center;border-right:1px solid #9c773b;padding:5px 10px}.contact-box:last-of-type{border:0}.contact-box h3{margin:0 0 7px;color:#f0c66c;font-size:18px}.contact-box a{display:block;color:#f2e8d5;font-size:15px;line-height:1.6}.contact-box a:hover{color:#f4c967}.brand-note{text-align:center;color:#eac15f;font:italic 18px cursive}.brand-note b{display:block;color:#f0c766;font: bold 19px Georgia,serif;margin-bottom:6px}
+footer{text-align:center;padding:12px;color:#9d8358;border-top:1px solid #4b3517;font-size:12px}footer strong{color:#dcb052}
+[dir=rtl] .nav{direction:rtl}[dir=rtl] .duration{border-left:0;border-right:1px solid #c79b4d;padding-left:0;padding-right:14px}[dir=rtl] .feature-icon{margin-right:0;margin-left:12px}
+@media(max-width:1100px){header{height:auto}.nav{flex-wrap:wrap;justify-content:center;padding:12px}.nav-links{order:3;width:100%;justify-content:center}.hero-side{width:20%}.side-script{font-size:25px}.products{gap:12px}.card h3{font-size:17px}.btn{font-size:12px;padding:10px 5px}.contact-inner{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.nav{gap:10px}.logo{font-size:28px}.logo-crown{font-size:40px}.languages button{padding:7px 9px}.nav-links{gap:13px;font-size:13px}.hero{height:260px}.hero-side{opacity:.35;width:18%}.hero-tag{white-space:normal}.hero p{font-size:15px}.projects{padding:0 12px 15px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.art{height:145px}.card{border-radius:17px}.card-content{padding:9px 7px 11px}.card h3{font-size:14px}.price{font-size:21px}.duration{font-size:11px;padding-left:8px}.duration b{font-size:14px}.price-row{gap:8px}.btn{font-size:11px;padding:9px 4px;gap:3px}.features{grid-template-columns:repeat(2,1fr);gap:14px}.feature{font-size:13px;border:0}.feature-icon{font-size:23px;margin-right:5px}.contact-inner{grid-template-columns:1fr 1fr;gap:12px}.contact-cta{padding:13px 8px}.contact-cta strong{font-size:16px}.contact-box{padding:4px;border:0}.contact-box h3{font-size:15px}.contact-box a{font-size:12px}.brand-note{font-size:14px}}
+@media(max-width:390px){.products{grid-template-columns:1fr}.card{max-width:360px;width:100%;margin:auto}.art{height:180px}.card h3{font-size:18px}.btn{font-size:13px}.nav-links{gap:9px}.nav-links .ico{margin-right:3px}}
 </style>
 </head>
 <body>
 <header><nav class="nav">
-<a href="#" class="logo">♛ COLONY<small>DIGITAL</small></a>
-<div class="nav-links"><a href="#home" data-i="home">Home</a><a href="#projects" data-i="services">Our Services</a><a href="#about" data-i="about">About Us</a><a href="#contact" data-i="contact">Contact</a></div>
-<div class="languages"><button class="active" onclick="setLanguage('en')">EN</button><button onclick="setLanguage('fr')">FR</button><button onclick="setLanguage('ar')">AR</button></div>
+<a href="#home" class="logo"><span class="logo-crown">♛</span><span>COLONY<small>DIGITAL</small></span></a>
+<div class="nav-links"><a href="#home"><span class="ico">⌂</span><span data-i="home">Home</span></a><a href="#projects"><span class="ico">▦</span><span data-i="services">Our Services</span></a><a href="#about"><span class="ico">ⓘ</span><span data-i="about">About Us</span></a><a href="#contact"><span class="ico">♧</span><span data-i="contact">Contact</span></a></div>
+<div class="languages"><button class="active" onclick="setLanguage('ar')">🇩🇿 العربية</button><button onclick="setLanguage('fr')">🇫🇷 Français</button><button onclick="setLanguage('en')">🇬🇧 English</button></div>
 </nav></header>
 <main>
-<section class="hero" id="home"><div class="crown">♛</div><h1>COLONY DIGITAL</h1><div class="tagline" data-i="tagline">Your Digital Experience Starts Here</div><p data-i="intro">Discover our digital invitation collections</p><div class="gold-line"></div><p style="color:#e7c477" data-i="special">✦ Make Your Special Moments Unforgettable ✦</p></section>
-<section class="section" id="projects"><h2 class="section-title" data-i="title">Our Projects</h2><p class="section-subtitle" data-i="subtitle">Choose the perfect invitation for your special occasion</p><div class="products" id="products"></div></section>
-<section class="section" id="about"><div class="features"><div><span class="feature-icon">♢</span><span data-i="feature1">Quality Designs</span></div><div><span class="feature-icon">⚡</span><span data-i="feature2">Instant Delivery</span></div><div><span class="feature-icon">♧</span><span data-i="feature3">Professional Support</span></div><div><span class="feature-icon">♥</span><span data-i="feature4">Your Satisfaction</span></div></div></section>
-<section class="contact" id="contact"><div class="contact-inner"><h2 data-i="contactTitle">Contact COLONY DIGITAL</h2><p style="text-align:center;color:#c7b899" data-i="contactIntro">We are here to help you!</p>
-<div class="contact-grid">
-<div class="contact-box"><h3>◉ WhatsApp</h3><a href="https://wa.me/213793400678">+213 793 400 678</a><a href="https://wa.me/213551708889">+213 551 708 889</a></div>
-<div class="contact-box"><h3>➤ Telegram</h3><a href="https://t.me/+213793400678">+213 793 400 678</a><a href="https://t.me/+213551708889">+213 551 708 889</a></div>
+<section class="hero" id="home">
+<div class="hero-side hero-left"><span class="rose">🌹</span><span class="rings">💍</span></div>
+<div class="hero-main"><div class="hero-crown">♛</div><h1>COLONY DIGITAL</h1><div class="hero-tag" data-i="tagline">Your Digital Experience Starts Here</div><p data-i="intro">Discover our digital invitation collections</p><div class="hero-rule"></div></div>
+<div class="hero-side hero-right"><div class="side-script" data-i="sideScript">Make Your<br>Special Moments<br>Unforgettable</div></div>
+</section>
+<section class="projects" id="projects"><div class="products" id="products"></div></section>
+<section id="about"><div class="features"><div class="feature"><span class="feature-icon">♢</span><span data-i="feature1">Secure & Reliable</span></div><div class="feature"><span class="feature-icon">ϟ</span><span data-i="feature2">Instant Delivery</span></div><div class="feature"><span class="feature-icon">♧</span><span data-i="feature3">Professional Support</span></div><div class="feature"><span class="feature-icon">♥</span><span data-i="feature4">Your Satisfaction Our Priority</span></div></div></section>
+<section class="contact" id="contact"><div class="contact-inner">
+<div class="contact-cta"><strong>♧ <span data-i="contactUs">Contact Us Now</span></strong><em data-i="help">We are here to help you!</em></div>
+<div class="contact-box"><h3>🟢 WhatsApp</h3><a href="https://wa.me/213793400678">+213 793 400 678</a><a href="https://wa.me/213551708889">+213 551 708 889</a></div>
+<div class="contact-box"><h3>🔵 Telegram</h3><a href="https://t.me/+213793400678">+213 793 400 678</a><a href="https://t.me/+213551708889">+213 551 708 889</a></div>
 <div class="contact-box"><h3>✉ Email</h3><a href="mailto:colonyus666@gmail.com">colonyus666@gmail.com</a></div>
-</div></div></section>
+<div class="brand-note"><b>COLONY DIGITAL</b><span data-i="brandNote">Together, let's create magic ✨</span></div>
+</div></section>
 </main>
-<footer><strong>♛ COLONY DIGITAL</strong><p data-i="footer">© 2026 COLONY DIGITAL. All Rights Reserved.</p></footer>
+<footer><strong>♛ COLONY DIGITAL</strong> · <span data-i="footer">© 2026 COLONY DIGITAL. All Rights Reserved.</span></footer>
 <script>
 const projects=[
-{name:"Wedding Card",id:"card",demo:"https://card.colony.dpdns.org/?groom=HANI&bride=TIZIGHI&date=2027-11-20&time=20%3A00&venue=Oran",},
+{name:"Wedding Card",id:"card",demo:"https://card.colony.dpdns.org/?groom=HANI&bride=TIZIGHI&date=2027-11-20&time=20%3A00&venue=Oran"},
 {name:"Wedding Invitation",id:"invite",demo:"https://wedding.colony.dpdns.org/maker.html?view=invite&groom=HANI&bride=TIZIGHI&date=2027-11-20&time=20%3A00&venue=Oran&phone=213793400678&style=blackgold&lang=ar&message=يشرفنا+دعوتكم+لمشاركتنا+فرحتنا"},
 {name:"Wedding Envelope",id:"envelope",demo:"https://envelope.colony.dpdns.org/?data="+encodeURIComponent(JSON.stringify({bride:"TIZIGHI",groom:"HANI",date:"2027-11-20T20:00",time:"20:00",venue:"Oran",phone:"213793400678",theme:"romantic",message:"We are delighted to invite you to celebrate with us."}))},
 {name:"Event Invitation",id:"event",demo:"https://event.colony.dpdns.org/"}
 ];
 const translations={
-en:{home:"Home",services:"Our Services",about:"About Us",contact:"Contact",tagline:"Your Digital Experience Starts Here",intro:"Discover our digital invitation collections",special:"✦ Make Your Special Moments Unforgettable ✦",title:"Our Projects",subtitle:"Choose the perfect invitation for your special occasion",demo:"View Demo",order:"Order Now",duration:"30 Days",feature1:"Quality Designs",feature2:"Instant Delivery",feature3:"Professional Support",feature4:"Your Satisfaction",contactTitle:"Contact COLONY DIGITAL",contactIntro:"We are here to help you!",footer:"© 2026 COLONY DIGITAL. All Rights Reserved.",message:"Hello COLONY DIGITAL! I am interested in ordering: "},
-fr:{home:"Accueil",services:"Nos Services",about:"À propos",contact:"Contact",tagline:"Votre expérience numérique commence ici",intro:"Découvrez nos collections d'invitations numériques",special:"✦ Rendez vos moments inoubliables ✦",title:"Nos Projets",subtitle:"Choisissez l'invitation parfaite pour votre événement",demo:"Voir le modèle",order:"Commander",duration:"30 jours",feature1:"Designs de qualité",feature2:"Livraison rapide",feature3:"Support professionnel",feature4:"Votre satisfaction",contactTitle:"Contacter COLONY DIGITAL",contactIntro:"Nous sommes là pour vous aider !",footer:"© 2026 COLONY DIGITAL. Tous droits réservés.",message:"Bonjour COLONY DIGITAL ! Je souhaite commander : "},
-ar:{home:"الرئيسية",services:"خدماتنا",about:"من نحن",contact:"اتصل بنا",tagline:"تجربتك الرقمية تبدأ من هنا",intro:"اكتشف مجموعتنا من الدعوات الرقمية",special:"✦ اجعل لحظاتك الخاصة لا تُنسى ✦",title:"مشاريعنا",subtitle:"اختر الدعوة المناسبة لمناسبتك الخاصة",demo:"مشاهدة النموذج",order:"اطلب الآن",duration:"30 يوماً",feature1:"تصاميم عالية الجودة",feature2:"تسليم سريع",feature3:"دعم احترافي",feature4:"رضاكم أولويتنا",contactTitle:"تواصل مع COLONY DIGITAL",contactIntro:"نحن هنا لمساعدتك!",footer:"© 2026 COLONY DIGITAL. جميع الحقوق محفوظة.",message:"السلام عليكم COLONY DIGITAL، أريد طلب خدمة: "}
+en:{home:"Home",services:"Our Services",about:"About Us",contact:"Contact",tagline:"Your Digital Experience Starts Here",intro:"Discover our digital invitation collections",sideScript:"Make Your<br>Special Moments<br>Unforgettable",demo:"View Demo",order:"Order Now",duration:"30 Days",feature1:"Secure & Reliable",feature2:"Instant Delivery",feature3:"Professional Support",feature4:"Your Satisfaction Our Priority",contactUs:"Contact Us Now",help:"We are here to help you!",brandNote:"Together, let's create magic ✨",footer:"© 2026 COLONY DIGITAL. All Rights Reserved.",message:"Hello COLONY DIGITAL! I am interested in ordering: "},
+fr:{home:"Accueil",services:"Nos Services",about:"À propos",contact:"Contact",tagline:"Votre expérience numérique commence ici",intro:"Découvrez nos collections d'invitations numériques",sideScript:"Rendez vos<br>moments spéciaux<br>inoubliables",demo:"Voir le modèle",order:"Commander",duration:"30 jours",feature1:"Sécurisé et fiable",feature2:"Livraison instantanée",feature3:"Support professionnel",feature4:"Votre satisfaction, notre priorité",contactUs:"Contactez-nous",help:"Nous sommes là pour vous aider !",brandNote:"Ensemble, créons la magie ✨",footer:"© 2026 COLONY DIGITAL. Tous droits réservés.",message:"Bonjour COLONY DIGITAL ! Je souhaite commander : "},
+ar:{home:"الرئيسية",services:"خدماتنا",about:"من نحن",contact:"اتصل بنا",tagline:"تجربتك الرقمية تبدأ من هنا",intro:"اكتشف مجموعتنا من الدعوات الرقمية",sideScript:"اجعل لحظاتك<br>الخاصة لا تُنسى",demo:"مشاهدة النموذج",order:"اطلب الآن",duration:"30 يوماً",feature1:"آمن وموثوق",feature2:"تسليم فوري",feature3:"دعم احترافي",feature4:"رضاكم أولويتنا",contactUs:"اتصل بنا الآن",help:"نحن هنا لمساعدتك!",brandNote:"معاً نصنع السحر ✨",footer:"© 2026 COLONY DIGITAL. جميع الحقوق محفوظة.",message:"السلام عليكم COLONY DIGITAL، أريد طلب خدمة: "}
 };
-let currentLanguage="en";
-function makeOrderLink(name){
-const message=translations[currentLanguage].message+name+" - 1000 DA - 30 Days";
-return "https://wa.me/213793400678?text="+encodeURIComponent(message);
-}
-function renderProducts(){
-const t=translations[currentLanguage];
-document.getElementById("products").innerHTML=projects.map(p=>'<article class="card"><div class="art"><div class="mockup '+({card:"card-design",invite:"invite-design",envelope:"envelope-design",event:"event-design"}[p.id])+'"><span class="mock-top">SPECIAL INVITATION</span><span class="mock-orn">✦ ❀ ✦</span><span class="mock-names">HANI<br>&<br>TIZIGHI</span><span class="mock-small">YOU ARE INVITED</span></div></div><div class="card-content"><h3>'+p.name+'</h3><div class="price">1000 DA</div><div class="duration">◷ '+t.duration+'</div><div class="actions"><a class="btn btn-demo" href="'+p.demo+'" target="_blank" rel="noopener">'+t.demo+'</a><a class="btn btn-order" href="'+makeOrderLink(p.name)+'" target="_blank" rel="noopener">'+t.order+'</a></div></div></article>').join("");
-}
-function setLanguage(lang){
-currentLanguage=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
-document.querySelectorAll("[data-i]").forEach(el=>{const key=el.dataset.i;if(translations[lang][key])el.textContent=translations[lang][key]});
-document.querySelectorAll(".languages button").forEach(btn=>btn.classList.toggle("active",btn.textContent.trim().toLowerCase()===lang));
-renderProducts();
-}
+let currentLanguage="ar";
+function makeOrderLink(name){const message=translations[currentLanguage].message+name+" - 1000 DA - 30 Days";return "https://wa.me/213793400678?text="+encodeURIComponent(message)}
+function renderProducts(){const t=translations[currentLanguage];document.getElementById("products").innerHTML=projects.map(p=>{
+let art=p.id==="card"?'<div class="invite-paper"><div class="paper-orn">❧ ❀ ❧</div><div class="paper-monogram">H&T</div><div class="paper-name">HANI & TIZIGHI</div><div class="paper-caption">WEDDING INVITATION</div><div class="paper-orn">❦</div></div>':p.id==="invite"?'<div class="phone"><div class="phone-inner"><div class="paper-orn">✦</div><div class="phone-title">Our<br>Wedding</div><div class="phone-rings">💍</div><div class="paper-caption">HANI & TIZIGHI</div></div></div>':p.id==="envelope"?'<div class="envelope"></div><div class="seal">♛</div>':'<div class="event-paper"><div class="paper-orn">✦</div><div class="event-title">Special<br>Event</div><div class="event-bow">🎀</div></div>';
+return '<article class="card"><div class="art art-'+p.id+'">'+art+'</div><div class="card-content"><h3><span class="symbol">'+({card:"♧",invite:"♜",envelope:"✉",event:"▦"}[p.id])+'</span>'+p.name+'</h3><div class="price-row"><div class="price">1000 DA</div><div class="duration"><b>▦</b> '+t.duration+'</div></div><div class="actions"><a class="btn btn-demo" href="'+p.demo+'" target="_blank" rel="noopener">◉ '+t.demo+'</a><a class="btn btn-order" href="'+makeOrderLink(p.name)+'" target="_blank" rel="noopener">🛒 '+t.order+'</a></div></div></article>';
+}).join("")}
+function setLanguage(lang){currentLanguage=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";document.querySelectorAll("[data-i]").forEach(el=>{const k=el.dataset.i;if(translations[lang][k])el.innerHTML=translations[lang][k]});document.querySelectorAll(".languages button").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(lang)));renderProducts()}
 renderProducts();
 </script>
-</body>
-</html>
+</body></html>
