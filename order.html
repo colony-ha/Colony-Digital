@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080604">
+<title>طلب دعوة | COLONY DIGITAL</title>
+<style>
+:root{--gold:#d9a943;--gold2:#f7d77e;--bg:#080604;--panel:#15100a;--line:#70501f;--cream:#fff2d5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#34230d 0,#080604 55%);color:var(--cream);font-family:Arial,Tahoma,sans-serif;padding:24px 14px}
+main{max-width:850px;margin:auto}.brand{text-align:center;color:var(--gold2);font: bold 30px Georgia,serif;letter-spacing:3px;margin:10px}.brand small{display:block;font: bold 12px Georgia,serif;letter-spacing:7px;margin-top:5px}
+h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{text-align:center;color:#d7c6a5;line-height:1.8;margin:0 0 22px}
+.panel{background:linear-gradient(145deg,#19130b,#0d0a06);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 15px 45px #0008}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.wide{grid-column:1/-1}label{display:block;font-size:13px;color:#e9cb83;margin-bottom:7px}input,select,textarea{width:100%;padding:13px;border:1px solid #74572c;border-radius:11px;background:#080705;color:#fff3d8;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--gold2)}textarea{min-height:95px;resize:vertical}.hint{font-size:12px;color:#bca77e;line-height:1.8}.submit{width:100%;margin-top:18px;padding:15px;border:0;border-radius:30px;background:linear-gradient(110deg,#b57920,#f6cf70);color:#171006;font-weight:bold;font-size:16px;cursor:pointer}.back{display:block;text-align:center;color:#e9c46d;margin-top:18px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.panel{padding:16px}h1{font-size:22px}}
+</style>
+</head>
+<body>
+<main>
+<a href="./" class="back">← العودة إلى COLONY DIGITAL</a>
+<div class="brand">♛ COLONY<small>DIGITAL</small></div>
+<h1>اطلب دعوتك الرقمية</h1>
+<p class="intro">عمّر المعلومات التالية، وراح نبعثولك الطلب مباشرة عبر WhatsApp باش نتواصلوا معاك ونكملوا التفاصيل.</p>
+<section class="panel">
+<form id="orderForm">
+<div class="grid">
+<div class="wide"><label for="project">المشروع المختار</label><select id="project" required>
+<option value="Wedding Card">Wedding Card</option><option value="Wedding Invitation">Wedding Invitation</option><option value="Wedding Envelope">Wedding Envelope</option><option value="Event Invitations">Event Invitations</option></select></div>
+<div class="wide"><label for="design">رقم أو اسم التصميم المختار</label><input id="design" placeholder="مثلاً: التصميم 3 أو Black Gold" required></div>
+<div><label for="customer">اسمك</label><input id="customer" required placeholder="الاسم الكامل"></div>
+<div><label for="customerPhone">رقم WhatsApp تاعك</label><input id="customerPhone" type="tel" required placeholder="+213..."></div>
+<div class="wide"><label for="title">عنوان الدعوة / نوع المناسبة</label><input id="title" required placeholder="مثلاً: دعوة لحضور حفل الزفاف"></div>
+<div><label for="name1">الاسم الرئيسي</label><input id="name1" required placeholder="اسم العريس أو صاحب المناسبة"></div>
+<div><label for="name2">اسم إضافي (اختياري)</label><input id="name2" placeholder="اسم العروس أو اسم آخر"></div>
+<div><label for="date">التاريخ</label><input id="date" type="date" required></div>
+<div><label for="time">الساعة</label><input id="time" type="time" required></div>
+<div class="wide"><label for="venue">مكان الحفل والمدينة</label><input id="venue" required placeholder="القاعة، الحي، المدينة"></div>
+<div class="wide"><label for="eventPhone">رقم WhatsApp الذي يظهر في الدعوة (اختياري)</label><input id="eventPhone" type="tel" placeholder="+213..."></div>
+<div class="wide"><label for="maps">رابط الموقع على Google Maps (اختياري)</label><input id="maps" type="url" placeholder="https://maps.app.goo.gl/..."></div>
+<div class="wide"><label for="message">رسالة الدعوة (اختياري)</label><textarea id="message" placeholder="اكتب الرسالة التي تريد ظهورها في الدعوة"></textarea></div>
+</div>
+<p class="hint">السعر: 1000 دج · مدة صلاحية الرابط بعد التفعيل: 30 يوماً. إرسال الطلب لا يعني الدفع أو التفعيل؛ نتواصل معاك أولاً لتأكيد التفاصيل.</p>
+<button class="submit" type="submit">إرسال الطلب عبر WhatsApp</button>
+</form>
+</section>
+<a href="./" class="back">COLONY DIGITAL · دعوات رقمية لكل مناسباتكم</a>
+</main>
+<script>
+const params=new URLSearchParams(location.search);
+const project=params.get('project');
+if(project){const select=document.getElementById('project');if([...select.options].some(o=>o.value===project))select.value=project;}
+document.getElementById('orderForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const v=id=>document.getElementById(id).value.trim();
+ const fields=[
+ ['المشروع',v('project')],['التصميم',v('design')],['اسم الزبون',v('customer')],['رقم الزبون',v('customerPhone')],
+ ['نوع المناسبة',v('title')],['الاسم الرئيسي',v('name1')],['الاسم الإضافي',v('name2')||'غير محدد'],
+ ['التاريخ',v('date')],['الساعة',v('time')],['المكان',v('venue')],['رقم WhatsApp في الدعوة',v('eventPhone')||'غير محدد'],
+ ['Google Maps',v('maps')||'غير محدد'],['رسالة الدعوة',v('message')||'بدون رسالة']
+ ];
+ const message='طلب جديد من COLONY DIGITAL\n\n'+fields.map(([k,val])=>k+': '+val).join('\n')+'\n\nالسعر: 1000 دج\nمدة الرابط بعد التفعيل: 30 يوماً';
+ location.href='https://wa.me/213793400678?text='+encodeURIComponent(message);
+});
+</script>
+</body>
+</html>
