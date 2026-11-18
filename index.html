@@ -66,7 +66,7 @@ footer{text-align:center;padding:12px;color:#9d8358;border-top:1px solid #4b3517
 const projects=[
 {name:"Wedding Card",id:"card",demo:"https://card.colony.dpdns.org/?groom=HANI&bride=TIZIGHI&date=2027-11-20&time=20%3A00&venue=Oran"},
 {name:"Wedding Invitation",id:"invite",demo:"https://wedding.colony.dpdns.org/maker.html?view=invite&groom=HANI&bride=TIZIGHI&date=2027-11-20&time=20%3A00&venue=Oran&phone=213793400678&style=blackgold&lang=ar&message=يشرفنا+دعوتكم+لمشاركتنا+فرحتنا"},
-{name:"Wedding Envelope",id:"envelope",demo:"https://envelope.colony.dpdns.org/?view=demo},
+{name:"Wedding Envelope",id:"envelope",demo:"https://envelope.colony.dpdns.org/?data="+encodeURIComponent(JSON.stringify({bride:"TIZIGHI",groom:"HANI",date:"2027-11-20T20:00",time:"20:00",venue:"Oran",phone:"213793400678",theme:"romantic",message:"We are delighted to invite you to celebrate with us."}))},
 {name:"Event Invitation",id:"event",demo:"https://event.colony.dpdns.org/"}
 ];
 const translations={
