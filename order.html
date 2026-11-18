@@ -62,10 +62,10 @@ function refreshDesigns(){
  }
 }
 document.getElementById('project').addEventListener('change',refreshDesigns);
-refreshDesigns();
 const params=new URLSearchParams(location.search);
 const project=params.get('project');
 if(project){const select=document.getElementById('project');if([...select.options].some(o=>o.value===project))select.value=project;}
+refreshDesigns();
 document.getElementById('orderForm').addEventListener('submit',e=>{
  e.preventDefault();
  const v=id=>document.getElementById(id).value.trim();
