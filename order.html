@@ -25,7 +25,7 @@ h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{
 <div class="grid">
 <div class="wide"><label for="project">المشروع المختار</label><select id="project" required>
 <option value="Wedding Card">Wedding Card</option><option value="Wedding Invitation">Wedding Invitation</option><option value="Wedding Envelope">Wedding Envelope</option><option value="Event Invitations">Event Invitations</option></select></div>
-<div class="wide"><label for="design">رقم أو اسم التصميم المختار</label><input id="design" placeholder="مثلاً: التصميم 3 أو Black Gold" required></div>
+<div class="wide"><label for="design">اختار التصميم</label><select id="design" required><option value="">اختار المشروع أولاً</option></select><p class="hint" id="designHint">اختار المشروع باش تظهرلك التصاميم المتوفرة.</p></div>
 <div><label for="customer">اسمك</label><input id="customer" required placeholder="الاسم الكامل"></div>
 <div><label for="customerPhone">رقم WhatsApp تاعك</label><input id="customerPhone" type="tel" required placeholder="+213..."></div>
 <div class="wide"><label for="title">عنوان الدعوة / نوع المناسبة</label><input id="title" required placeholder="مثلاً: دعوة لحضور حفل الزفاف"></div>
@@ -34,8 +34,8 @@ h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{
 <div><label for="date">التاريخ</label><input id="date" type="date" required></div>
 <div><label for="time">الساعة</label><input id="time" type="time" required></div>
 <div class="wide"><label for="venue">مكان الحفل والمدينة</label><input id="venue" required placeholder="القاعة، الحي، المدينة"></div>
-<div class="wide"><label for="eventPhone">رقم WhatsApp الذي يظهر في الدعوة (اختياري)</label><input id="eventPhone" type="tel" placeholder="+213..."></div>
-<div class="wide"><label for="maps">رابط الموقع على Google Maps (اختياري)</label><input id="maps" type="url" placeholder="https://maps.app.goo.gl/..."></div>
+<div class="wide"><label for="eventPhone">رقم WhatsApp الذي يظهر في الدعوة</label><input id="eventPhone" type="tel" required placeholder="+213..."></div>
+<div class="wide"><label for="maps">رابط الموقع على Google Maps</label><input id="maps" type="url" required placeholder="https://maps.app.goo.gl/..."></div>
 <div class="wide"><label for="message">رسالة الدعوة (اختياري)</label><textarea id="message" placeholder="اكتب الرسالة التي تريد ظهورها في الدعوة"></textarea></div>
 </div>
 <p class="hint">السعر: 1000 دج · مدة صلاحية الرابط بعد التفعيل: 30 يوماً. إرسال الطلب لا يعني الدفع أو التفعيل؛ نتواصل معاك أولاً لتأكيد التفاصيل.</p>
@@ -45,6 +45,24 @@ h1{text-align:center;color:var(--gold2);font-size:26px;margin:25px 0 8px}.intro{
 <a href="./" class="back">COLONY DIGITAL · دعوات رقمية لكل مناسباتكم</a>
 </main>
 <script>
+const designSelect=document.getElementById('design');
+const designHint=document.getElementById('designHint');
+const designOptions={'Wedding Invitation':12,'Wedding Envelope':4};
+function refreshDesigns(){
+ const selected=document.getElementById('project').value;
+ const count=designOptions[selected];
+ designSelect.innerHTML='';
+ if(count){
+  designSelect.add(new Option('اختار التصميم',''));
+  for(let i=1;i<=count;i++) designSelect.add(new Option('التصميم '+i,'التصميم '+i));
+  designHint.textContent='متوفر '+count+' تصميمات لهذا المشروع. اختار التصميم اللي عجبك.';
+ }else{
+  designSelect.add(new Option('التصميم 1','التصميم 1'));
+  designHint.textContent='اختار التصميم 1 لهذا المشروع، وتقدر توضّح التفاصيل معانا عبر WhatsApp.';
+ }
+}
+document.getElementById('project').addEventListener('change',refreshDesigns);
+refreshDesigns();
 const params=new URLSearchParams(location.search);
 const project=params.get('project');
 if(project){const select=document.getElementById('project');if([...select.options].some(o=>o.value===project))select.value=project;}
@@ -54,8 +72,8 @@ document.getElementById('orderForm').addEventListener('submit',e=>{
  const fields=[
  ['المشروع',v('project')],['التصميم',v('design')],['اسم الزبون',v('customer')],['رقم الزبون',v('customerPhone')],
  ['نوع المناسبة',v('title')],['الاسم الرئيسي',v('name1')],['الاسم الإضافي',v('name2')||'غير محدد'],
- ['التاريخ',v('date')],['الساعة',v('time')],['المكان',v('venue')],['رقم WhatsApp في الدعوة',v('eventPhone')||'غير محدد'],
- ['Google Maps',v('maps')||'غير محدد'],['رسالة الدعوة',v('message')||'بدون رسالة']
+ ['التاريخ',v('date')],['الساعة',v('time')],['المكان',v('venue')],['رقم WhatsApp في الدعوة',v('eventPhone')],
+ ['Google Maps',v('maps')],['رسالة الدعوة',v('message')||'بدون رسالة']
  ];
  const message='طلب جديد من COLONY DIGITAL\n\n'+fields.map(([k,val])=>k+': '+val).join('\n')+'\n\nالسعر: 1000 دج\nمدة الرابط بعد التفعيل: 30 يوماً';
  location.href='https://wa.me/213793400678?text='+encodeURIComponent(message);
