@@ -81,6 +81,11 @@ footer{text-align:center;padding:12px;color:#9d8358;border-top:1px solid #4b3517
    <a href="https://envelope.colony.dpdns.org/" target="_blank" rel="noopener">Wedding Envelope</a>
    <a href="https://event.colony.dpdns.org/maker.html" target="_blank" rel="noopener">Event Invitation</a>
   </div>
+  <section class="orders-panel">
+   <div class="orders-heading"><h3>طلبات الزبائن</h3><button type="button" class="admin-submit" id="refreshOrdersBtn">تحديث الطلبات</button></div>
+   <p id="ordersStatus" role="status">اضغط على تحديث الطلبات لعرض الطلبات المسجلة.</p>
+   <div id="ordersList" class="orders-list"></div>
+  </section>
   <div class="admin-actions"><button class="admin-submit" type="button" onclick="adminLogout()">تسجيل الخروج</button></div>
  </div>
 </div>
@@ -89,7 +94,18 @@ footer{text-align:center;padding:12px;color:#9d8358;border-top:1px solid #4b3517
 .admin-projects a{display:block;padding:18px 10px;border:1px solid #c99a42;border-radius:14px;color:#f4d27d;background:#100c06;font-weight:bold}
 .admin-projects a:hover{background:#30200b}
 #adminLoginStatus{min-height:22px;color:#ffd37a;font-size:14px}
-@media(max-width:500px){.admin-projects{grid-template-columns:1fr}}
+.orders-panel{margin-top:24px;padding-top:18px;border-top:1px solid #70501f;text-align:right}
+.orders-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.orders-heading h3{margin:0;color:#f3cf78}
+.orders-heading button{padding:9px 14px}
+#ordersStatus{color:#d8c7a5;font-size:13px;line-height:1.7}
+.orders-list{display:grid;gap:12px;margin-top:12px}
+.order-item{border:1px solid #70501f;border-radius:13px;padding:13px;background:#100c06;text-align:right}
+.order-item h4{margin:0 0 8px;color:#f3cf78}
+.order-item p{margin:5px 0;color:#f2e5c8;font-size:13px;overflow-wrap:anywhere}
+.order-item select{max-width:220px;padding:9px;margin-top:8px;background:#090704;color:#fff;border:1px solid #8c682e;border-radius:8px}
+.order-item button{padding:9px 13px;margin:8px 0 0 7px;border:1px solid #c99a42;border-radius:18px;background:#d9a943;color:#130d04;font-weight:bold;cursor:pointer}
+@media(max-width:500px){.admin-projects{grid-template-columns:1fr}.orders-heading{align-items:stretch}.orders-heading button{width:100%}}
 </style>
 <footer><strong>♛ COLONY DIGITAL</strong> · <span data-i="footer">© 2026 COLONY DIGITAL. All Rights Reserved.</span></footer>
 <script>
@@ -118,7 +134,7 @@ document.getElementById("adminModal").addEventListener("click",function(e){if(e.
 const ADMIN_API = "https://colony-admin-api.colonyus666.workers.dev";
 const ADMIN_SESSION_KEY = "colony_admin_session";
 function showAdminStatus(message){document.getElementById("adminLoginStatus").textContent=message}
-function showAdminDashboard(){closeAdminLogin();document.getElementById("adminDashboard").classList.add("open")}
+function showAdminDashboard(){closeAdminLogin();document.getElementById("adminDashboard").classList.add("open");loadAdminOrders()}
 async function verifyAdminSession(){
  const token=sessionStorage.getItem(ADMIN_SESSION_KEY);
  if(!token)return;
@@ -155,6 +171,89 @@ document.getElementById("adminLoginForm").addEventListener("submit",async functi
   submit.disabled=false;submit.textContent="تسجيل الدخول";
  }
 });
+async function loadAdminOrders(){
+ const token=sessionStorage.getItem(ADMIN_SESSION_KEY);
+ const status=document.getElementById("ordersStatus");
+ const list=document.getElementById("ordersList");
+ if(!token){status.textContent="سجّل الدخول لعرض الطلبات.";return;}
+ status.textContent="جارٍ تحميل الطلبات...";
+ list.replaceChildren();
+ try{
+  const response=await fetch(ADMIN_API+"/admin/orders",{
+   method:"POST",
+   headers:{Authorization:"Bearer "+token}
+  });
+  const result=await response.json();
+  if(!response.ok||!result.success){
+   status.textContent=result.message||"تعذر تحميل الطلبات.";
+   return;
+  }
+  const orders=result.orders||[];
+  status.textContent=orders.length?("عدد الطلبات: "+orders.length):"لا توجد طلبات مسجلة حالياً.";
+  for(const order of orders){
+   const card=document.createElement("article");
+   card.className="order-item";
+   const heading=document.createElement("h4");
+   heading.textContent="#"+order.id+" · "+(order.project||"طلب");
+   card.appendChild(heading);
+   const details=[
+    ["الزبون",order.customer],["رقم WhatsApp",order.customer_phone],
+    ["التصميم",order.design],["عنوان الدعوة",order.title],
+    ["الأسماء",[order.name1,order.name2].filter(Boolean).join(" / ")],
+    ["التاريخ والساعة",[order.event_date,order.event_time].filter(Boolean).join(" · ")],
+    ["المكان",order.venue],["نوع المناسبة",order.event_type],
+    ["رسالة",order.message],["تاريخ الاستلام",order.created_at]
+   ];
+   for(const [label,value] of details){
+    if(!value)continue;
+    const p=document.createElement("p");
+    p.textContent=label+": "+value;
+    card.appendChild(p);
+   }
+   const statusLabel=document.createElement("label");
+   statusLabel.textContent="حالة الطلب: ";
+   const select=document.createElement("select");
+   ["جديد","قيد المعالجة","مكتمل","ملغى"].forEach(value=>{
+    const option=document.createElement("option");
+    option.value=value;option.textContent=value;
+    select.appendChild(option);
+   });
+   select.value=order.status||"جديد";
+   statusLabel.appendChild(select);
+   card.appendChild(statusLabel);
+   const save=document.createElement("button");
+   save.type="button";save.textContent="حفظ الحالة";
+   save.addEventListener("click",()=>updateOrderStatus(order.id,select.value,save));
+   card.appendChild(save);
+   list.appendChild(card);
+  }
+ }catch(error){
+  status.textContent="تعذر الاتصال بخدمة الطلبات.";
+ }
+}
+async function updateOrderStatus(id,status,button){
+ const token=sessionStorage.getItem(ADMIN_SESSION_KEY);
+ button.disabled=true;button.textContent="جارٍ الحفظ...";
+ try{
+  const response=await fetch(ADMIN_API+"/admin/order-status",{
+   method:"POST",
+   headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},
+   body:JSON.stringify({id,status})
+  });
+  const result=await response.json();
+  if(!response.ok||!result.success){
+   alert(result.message||"تعذر تحديث الحالة.");
+   return;
+  }
+  alert("تم تحديث حالة الطلب.");
+  loadAdminOrders();
+ }catch(error){
+  alert("تعذر الاتصال بخدمة الإدارة.");
+ }finally{
+  button.disabled=false;button.textContent="حفظ الحالة";
+ }
+}
+document.getElementById("refreshOrdersBtn").addEventListener("click",loadAdminOrders);
 function adminLogout(){
  sessionStorage.removeItem(ADMIN_SESSION_KEY);
  document.getElementById("adminDashboard").classList.remove("open");
