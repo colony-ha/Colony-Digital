@@ -117,6 +117,13 @@ footer{text-align:center;padding:12px;color:#9d8358;border-top:1px solid #4b3517
 .order-item select{max-width:220px;padding:9px;margin-top:8px;background:#090704;color:#fff;border:1px solid #8c682e;border-radius:8px}
 .order-item button{padding:9px 13px;margin:8px 0 0 7px;border:1px solid #c99a42;border-radius:18px;background:#d9a943;color:#130d04;font-weight:bold;cursor:pointer}
 @media(max-width:500px){.admin-projects{grid-template-columns:1fr}.orders-heading{align-items:stretch}.orders-heading button{width:100%}}
+/* Keep the admin dashboard fully accessible on short screens */
+#adminDashboard{overflow-y:auto;align-items:center}
+#adminDashboard .admin-box{max-height:calc(100vh - 32px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#9b712e #100c06}
+#adminDashboard .admin-box::-webkit-scrollbar{width:8px}
+#adminDashboard .admin-box::-webkit-scrollbar-track{background:#100c06;border-radius:8px}
+#adminDashboard .admin-box::-webkit-scrollbar-thumb{background:#9b712e;border-radius:8px}
+@media(max-width:600px){#adminDashboard{padding:10px;align-items:flex-start}#adminDashboard .admin-box{max-height:calc(100vh - 20px);padding:20px 16px}}
 </style>
 <footer><strong>♛ COLONY DIGITAL</strong> · <span data-i="footer">© 2026 COLONY DIGITAL. All Rights Reserved.</span></footer>
 <script>
