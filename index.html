@@ -83,6 +83,13 @@ footer{text-align:center;padding:12px;color:#9d8358;border-top:1px solid #4b3517
   </div>
   <section class="orders-panel">
    <div class="orders-heading"><h3>طلبات الزبائن</h3><button type="button" class="admin-submit" id="refreshOrdersBtn">تحديث الطلبات</button></div>
+   <div class="order-stats" id="orderStats" aria-label="إحصائيات الطلبات">
+    <div class="order-stat"><span>إجمالي الطلبات</span><strong id="statTotal">0</strong></div>
+    <div class="order-stat"><span>جديدة</span><strong id="statNew">0</strong></div>
+    <div class="order-stat"><span>قيد المعالجة</span><strong id="statProcessing">0</strong></div>
+    <div class="order-stat"><span>مكتملة</span><strong id="statCompleted">0</strong></div>
+    <div class="order-stat"><span>ملغاة</span><strong id="statCancelled">0</strong></div>
+   </div>
    <p id="ordersStatus" role="status">اضغط على تحديث الطلبات لعرض الطلبات المسجلة.</p>
    <div id="ordersList" class="orders-list"></div>
   </section>
@@ -99,6 +106,10 @@ footer{text-align:center;padding:12px;color:#9d8358;border-top:1px solid #4b3517
 .orders-heading h3{margin:0;color:#f3cf78}
 .orders-heading button{padding:9px 14px}
 #ordersStatus{color:#d8c7a5;font-size:13px;line-height:1.7}
+.order-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:16px 0 12px}
+.order-stat{min-width:0;padding:13px 7px;border:1px solid #70501f;border-radius:12px;background:linear-gradient(145deg,#1a1308,#090704);text-align:center}
+.order-stat span{display:block;color:#d8c7a5;font-size:12px;line-height:1.5}
+.order-stat strong{display:block;margin-top:5px;color:#f3cf78;font-size:26px;font-variant-numeric:tabular-nums}
 .orders-list{display:grid;gap:12px;margin-top:12px}
 .order-item{border:1px solid #70501f;border-radius:13px;padding:13px;background:#100c06;text-align:right}
 .order-item h4{margin:0 0 8px;color:#f3cf78}
@@ -189,6 +200,19 @@ async function loadAdminOrders(){
    return;
   }
   const orders=result.orders||[];
+  const counts={total:orders.length,new:0,processing:0,completed:0,cancelled:0};
+  for(const order of orders){
+   const state=order.status||"جديد";
+   if(state==="جديد")counts.new++;
+   else if(state==="قيد المعالجة")counts.processing++;
+   else if(state==="مكتمل")counts.completed++;
+   else if(state==="ملغى")counts.cancelled++;
+  }
+  document.getElementById("statTotal").textContent=counts.total;
+  document.getElementById("statNew").textContent=counts.new;
+  document.getElementById("statProcessing").textContent=counts.processing;
+  document.getElementById("statCompleted").textContent=counts.completed;
+  document.getElementById("statCancelled").textContent=counts.cancelled;
   status.textContent=orders.length?("عدد الطلبات: "+orders.length):"لا توجد طلبات مسجلة حالياً.";
   for(const order of orders){
    const card=document.createElement("article");
