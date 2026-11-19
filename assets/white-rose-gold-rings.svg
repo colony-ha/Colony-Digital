@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 500">
+<defs>
+ <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".48" stop-color="#f5eee5"/><stop offset="1" stop-color="#cfc4b7"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0ad"/><stop offset=".35" stop-color="#d7a53c"/><stop offset=".7" stop-color="#fff0a3"/><stop offset="1" stop-color="#956319"/></linearGradient>
+ <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<ellipse cx="205" cy="435" rx="135" ry="17" fill="#000" opacity=".28" filter="url(#shadow)"/>
+<path d="M205 420 C190 350 206 286 184 224 C175 200 162 183 148 164" fill="none" stroke="#557044" stroke-width="9" stroke-linecap="round"/>
+<path d="M190 332 C125 282 87 299 75 338 C126 354 161 352 190 332Z" fill="#526d42" stroke="#8a9b66" stroke-width="2"/>
+<path d="M194 370 C248 312 294 321 306 359 C265 388 224 391 194 370Z" fill="#415f3b" stroke="#82935b" stroke-width="2"/>
+<path d="M80 337 Q137 325 190 332 M199 370 Q251 350 300 359" fill="none" stroke="#b0b98a" stroke-width="2" opacity=".7"/>
+<!-- rose outer petals -->
+<g stroke="#cfc4b7" stroke-width="2">
+ <path fill="url(#petal)" d="M205 215 C143 219 109 174 125 124 C137 87 183 83 205 117 C226 76 278 83 289 126 C303 177 260 218 205 215Z"/>
+ <path fill="url(#petal)" d="M205 213 C157 190 151 139 180 112 C205 88 247 106 250 143 C273 117 307 142 294 176 C281 213 240 231 205 213Z"/>
+ <path fill="url(#petal)" d="M204 219 C162 228 126 207 134 174 C142 142 174 138 197 158 C212 128 249 133 264 162 C281 197 246 228 204 219Z"/>
+</g>
+<!-- inner petals -->
+<g stroke="#d7cbbd" stroke-width="1.7">
+ <path fill="#fffaf2" d="M204 207 C171 194 168 163 189 145 C207 130 233 144 231 166 C253 153 271 173 258 194 C245 215 221 220 204 207Z"/>
+ <path fill="#eee5da" d="M204 204 C185 188 188 165 205 157 C220 151 236 166 228 181 C242 180 249 194 237 205 C225 216 211 214 204 204Z"/>
+ <path fill="#fff" d="M203 198 C194 186 199 174 210 171 C220 169 226 179 219 188 C229 191 225 203 214 205Z"/>
+</g>
+<!-- delicate gold ribbon curls -->
+<path d="M80 112 C32 73 45 39 91 48 C123 54 125 88 102 101" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+<path d="M288 83 C335 47 372 75 345 111 C331 130 308 127 301 112" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+<!-- wedding rings -->
+<g fill="none" stroke="url(#gold)" stroke-width="13">
+ <ellipse cx="252" cy="385" rx="48" ry="58" transform="rotate(-25 252 385)"/>
+ <ellipse cx="302" cy="374" rx="48" ry="58" transform="rotate(22 302 374)"/>
+</g>
+<path d="M247 328 l7 -12 8 12 -8 8Z" fill="#fff4c6" stroke="#c28c2b" stroke-width="2"/>
+<path d="M302 317 l7 -12 8 12 -8 8Z" fill="#fff4c6" stroke="#c28c2b" stroke-width="2"/>
+<g fill="#fff0b0"><circle cx="255" cy="320" r="3"/><circle cx="310" cy="309" r="3"/></g>
+</svg>
