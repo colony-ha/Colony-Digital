@@ -142,20 +142,70 @@ if(project){const select=document.getElementById('project');if([...select.option
 refreshDesigns();
 updateProjectFields();
 document.getElementById('orderForm').querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',updateOrderPreview));
-document.getElementById('orderForm').addEventListener('submit',e=>{
+document.getElementById('orderForm').addEventListener('submit',async e=>{
  e.preventDefault();
  const v=id=>document.getElementById(id).value.trim();
+ const submit=e.currentTarget.querySelector('button[type="submit"]');
  if(!v('design')){alert('اختار صورة التصميم اللي عجباتك قبل إرسال الطلب.');return;}
+ if(!e.currentTarget.reportValidity())return;
  if(!document.getElementById('approvePreview').checked){alert('شوف المعاينة ووافق عليها قبل إرسال الطلب.');document.getElementById('approvePreview').focus();return;}
+
+ const project=v('project');
+ const eventType=project==='Event Invitations'
+   ? document.getElementById('eventType').selectedOptions[0].text
+   : v('title');
+
+ const payload={
+  project,
+  design:v('design'),
+  customer:v('customer'),
+  customer_phone:v('customerPhone'),
+  event_type:eventType,
+  title:v('title'),
+  name1:v('name1'),
+  name2:v('name2'),
+  event_date:v('date'),
+  event_time:v('time'),
+  venue:v('venue'),
+  event_phone:v('eventPhone'),
+  maps:v('maps'),
+  message:v('message')
+ };
+
  const fields=[
- ['المشروع',v('project')],['التصميم المختار',v('design')],['الزبون وافق على المعاينة','نعم'],['اسم الزبون',v('customer')],['رقم الزبون',v('customerPhone')],
- ['نوع المناسبة',v('project')==='Event Invitations'?document.getElementById('eventType').selectedOptions[0].text:v('title')],['عنوان الدعوة',v('title')],['الاسم الرئيسي',v('name1')],['الاسم الإضافي',v('name2')||'غير محدد'],
- ['التاريخ',v('date')],['الساعة',v('time')],['المكان',v('venue')],['رقم WhatsApp في الدعوة',v('eventPhone')],
- ['Google Maps',v('maps')],['رسالة الدعوة',v('message')||'بدون رسالة']
+  ['المشروع',payload.project],['التصميم المختار',payload.design],
+  ['الزبون وافق على المعاينة','نعم'],['اسم الزبون',payload.customer],
+  ['رقم الزبون',payload.customer_phone],['نوع المناسبة',eventType],
+  ['عنوان الدعوة',payload.title],['الاسم الرئيسي',payload.name1],
+  ['الاسم الإضافي',payload.name2||'غير محدد'],['التاريخ',payload.event_date],
+  ['الساعة',payload.event_time],['المكان',payload.venue],
+  ['رقم WhatsApp في الدعوة',payload.event_phone],['Google Maps',payload.maps],
+  ['رسالة الدعوة',payload.message||'بدون رسالة']
  ];
  const message='طلب جديد من COLONY DIGITAL\n\n'+fields.map(([k,val])=>k+': '+val).join('\n')+'\n\nالسعر: 1000 دج\nمدة الرابط بعد التفعيل: 30 يوماً';
- location.href='https://wa.me/213793400678?text='+encodeURIComponent(message);
-});
+
+ submit.disabled=true;
+ submit.textContent='جارٍ حفظ الطلب...';
+ try{
+  const response=await fetch('https://colony-admin-api.colonyus666.workers.dev/orders',{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify(payload)
+  });
+  const result=await response.json();
+  if(!response.ok||!result.success){
+   alert('تعذر حفظ الطلب في الموقع. لم يتم إرسال الطلب بعد. حاول مرة أخرى أو تواصل معنا عبر WhatsApp.');
+   return;
+  }
+  alert('تم تسجيل طلبك بنجاح! سنفتح WhatsApp لإرسال تفاصيل الطلب.');
+  location.href='https://wa.me/213793400678?text='+encodeURIComponent(message);
+ }catch(error){
+  alert('تعذر الاتصال بخدمة حفظ الطلبات. لم يتم إرسال الطلب. حاول مرة أخرى بعد قليل.');
+ }finally{
+  submit.disabled=false;
+  submit.textContent='إرسال الطلب عبر WhatsApp';
+ }
+});});
 </script>
 </body>
 </html>
